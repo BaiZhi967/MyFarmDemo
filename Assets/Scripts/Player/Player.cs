@@ -6,10 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-    public float inputX;
-    public float inputY;
+    private float inputX;
+    private float inputY;
     public float speed;
-    public Vector2 movementInput;
+    private Vector2 movementInput;
 
     private void Awake()
     {
