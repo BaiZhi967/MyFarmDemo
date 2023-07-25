@@ -3,7 +3,7 @@ guid: 7f1ec8314d44949f29dbb2b0651eccf3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -106,6 +107,18 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -252,8 +265,8 @@ TextureImporter:
       - - {x: -10, y: 10}
         - {x: -10, y: -10}
         - {x: 10, y: -10}
-        - {x: 10, y: 0}
-        - {x: 0, y: 10}
+        - {x: 10, y: -1}
+        - {x: -1, y: 10}
       tessellationDetail: 0
       bones: []
       spriteID: 638c4f2fdb3cd46c6a7ff3cdb41ac60c
@@ -299,8 +312,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 10, y: -9}
-        - {x: -9, y: 10}
+      - - {x: 10, y: -10}
+        - {x: -9, y: 9}
         - {x: -10, y: 10}
         - {x: -10, y: -10}
         - {x: 10, y: -10}
@@ -325,10 +338,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
+      - - {x: -10, y: 9}
         - {x: -10, y: -10}
         - {x: 10, y: -10}
-        - {x: 10, y: 0}
+        - {x: 10, y: -1}
       tessellationDetail: 0
       bones: []
       spriteID: 2d24e806125414a12bb540c8d89bba25
@@ -352,8 +365,8 @@ TextureImporter:
       physicsShape:
       - - {x: -10, y: -10}
         - {x: 8, y: -10}
-        - {x: 10, y: -10}
-        - {x: -10, y: 0}
+        - {x: 9, y: -10}
+        - {x: -10, y: -1}
       tessellationDetail: 0
       bones: []
       spriteID: ce561666acb2e46658b09fe0aceacc36
@@ -373,16 +386,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Collisions@20_9: 1480794293
-      Collisions@20_6: -2142550502
       Collisions@20_0: 656204086
-      Collisions@20_5: 1907921350
+      Collisions@20_1: 17745525
       Collisions@20_2: 817383395
       Collisions@20_3: 833349317
-      Collisions@20_8: 888000788
-      Collisions@20_7: 1336789450
-      Collisions@20_1: 17745525
       Collisions@20_4: -1631512107
+      Collisions@20_5: 1907921350
+      Collisions@20_6: -2142550502
+      Collisions@20_7: 1336789450
+      Collisions@20_8: 888000788
+      Collisions@20_9: 1480794293
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
