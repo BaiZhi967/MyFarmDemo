@@ -7,6 +7,9 @@ namespace WzFarm.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
+        [Header("背包状态")] [SerializeField] private GameObject bagUI;
+        private bool bagOpenned;
+        
         [SerializeField] private SlotUI[] playerSlots;
 
         private void OnEnable()
@@ -17,6 +20,16 @@ namespace WzFarm.Inventory
         private void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
+        }
+        /// <summary>
+        /// 开关背包
+        /// </summary>
+        /// <returns>背包开关状态</returns>
+        public void OpenBagUI()
+        {
+            bagOpenned = !bagOpenned;
+            bagUI.SetActive(bagOpenned);
+            //return bagOpenned;
         }
 
         private void OnUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
@@ -46,7 +59,17 @@ namespace WzFarm.Inventory
             {
                 playerSlots[i].slotIndex = i;
             }
+            bagOpenned = bagUI.activeInHierarchy;
         }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                OpenBagUI();
+            }
+        }
+        
+        
         
     }
 }
