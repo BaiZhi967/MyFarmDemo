@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 namespace WzFarm.Inventory
 {
-    public class SlotUI : MonoBehaviour
+    public class SlotUI : MonoBehaviour,IPointerClickHandler
     {
         [Header("组件获取")] 
         [SerializeField] private Image slotImage;
         [SerializeField] private TextMeshProUGUI amontText;
-        [SerializeField] private Image slotHighLight;
+        [SerializeField] public Image slotHighLight;
         [SerializeField] private Button _button;
         [Header("盒子类型")] public SlotType slotType;
     
@@ -20,7 +23,8 @@ namespace WzFarm.Inventory
         public ItemDetails _ItemDetails;
         public int itemAmount;
         public int slotIndex;
-    
+
+        private InventoryUI _inventoryUI => GetComponentInParent<InventoryUI>();
         private void Start()
         {
             isSelected = false;
@@ -56,6 +60,11 @@ namespace WzFarm.Inventory
             slotImage.enabled = false;
             amontText.text = String.Empty;
             _button.interactable = false;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            //TODO:点击高亮
         }
     }
 
