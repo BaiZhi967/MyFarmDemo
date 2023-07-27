@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,12 @@ namespace WzFarm.Inventory
         public ItemDataList_SO _ItemDataListSo;
 
         [Header("背包数据")] public InventoryBag_SO PlayerBag;
-        
-        
+
+        private void Start()
+        {
+            EventHandler.CallpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
+        }
+
         /// <summary>
         /// 通过ID查找物品
         /// </summary>
@@ -41,6 +46,9 @@ namespace WzFarm.Inventory
             {
                 Destroy(item.gameObject);
             }
+            
+            //更新UI
+            EventHandler.CallpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
         }
 
         /// <summary>
