@@ -12,7 +12,7 @@ public static class EventHandler
     /// </summary>
     /// <param name="location">物品位置</param>
     /// <param name="list">物品列表</param>
-    public static void CallpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
+    public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
     {
         UpdateInventoryUI?.Invoke(location,list);
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
@@ -10,7 +11,7 @@ using Image = UnityEngine.UI.Image;
 
 namespace WzFarm.Inventory
 {
-    public class SlotUI : MonoBehaviour,IPointerClickHandler
+    public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndDragHandler,IDragHandler
     {
         [Header("组件获取")] 
         [SerializeField] private Image slotImage;
@@ -68,6 +69,50 @@ namespace WzFarm.Inventory
             isSelected = !isSelected;
             _inventoryUI.UpdateSlotHightlight(this.slotIndex);
         }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if (this.itemAmount > 0)
+            {
+                _inventoryUI.drapImage.enabled = true;
+                _inventoryUI.drapImage.sprite = this.slotImage.sprite;
+                _inventoryUI.drapImage.SetNativeSize();
+                isSelected = true;
+                _inventoryUI.UpdateSlotHightlight(this.slotIndex);
+            }
+        }
+        public void OnDrag(PointerEventData eventData)
+        {
+            _inventoryUI.drapImage.transform.position = Input.mousePosition;
+        }
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _inventoryUI.drapImage.enabled = false;
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+
+            if (eventData.pointerCurrentRaycast.gameObject != null)
+            {
+                if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null)
+                {
+                    return;
+                }
+                
+                //交换物品
+                var targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
+                int targetIndex = targetSlot.slotIndex;
+                if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Bag)
+                {
+                    InventoryManager.Instance.SwapItem(this.slotIndex,targetIndex);
+                    targetSlot.isSelected = true;
+                    _inventoryUI.UpdateSlotHightlight(targetIndex);
+                }
+
+
+            }
+            
+        }
+
+        
     }
 
 }

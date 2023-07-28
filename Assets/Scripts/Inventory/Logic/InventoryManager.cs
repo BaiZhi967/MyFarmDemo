@@ -15,7 +15,7 @@ namespace WzFarm.Inventory
 
         private void Start()
         {
-            EventHandler.CallpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
             
         }
 
@@ -52,7 +52,7 @@ namespace WzFarm.Inventory
             }
             
             //更新UI
-            EventHandler.CallpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
         }
 
         /// <summary>
@@ -114,6 +114,30 @@ namespace WzFarm.Inventory
 
                 PlayerBag.itemList[index] = item;
             }
+        }
+        
+        /// <summary>
+        /// Player背包范围内交换物品
+        /// </summary>
+        /// <param name="fromIndex">起始序号</param>
+        /// <param name="targetIndex">目标数据序号</param>
+        public void SwapItem(int fromIndex, int targetIndex)
+        {
+            InventoryItem currentItem = PlayerBag.itemList[fromIndex];
+            InventoryItem targetItem = PlayerBag.itemList[targetIndex];
+
+            if (targetItem.itemID != 0)
+            {
+                PlayerBag.itemList[fromIndex] = targetItem;
+                PlayerBag.itemList[targetIndex] = currentItem;
+            }
+            else
+            {
+                PlayerBag.itemList[targetIndex] = currentItem;
+                PlayerBag.itemList[fromIndex] = new InventoryItem();
+            }
+            
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
         }
 
         

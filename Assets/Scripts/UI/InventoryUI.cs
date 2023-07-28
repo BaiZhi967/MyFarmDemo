@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace WzFarm.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
+        [Header("拖拽图片")] public Image drapImage;
         [Header("背包状态")] [SerializeField] private GameObject bagUI;
         private bool bagOpenned;
         
@@ -88,6 +90,8 @@ namespace WzFarm.Inventory
                 }
             }
         }
+        
+        
         
     }
 }
