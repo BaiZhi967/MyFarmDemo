@@ -9,6 +9,7 @@ namespace WzFarm.Inventory
     public class InventoryUI : MonoBehaviour
     {
         [Header("拖拽图片")] public Image drapImage;
+        [Header("物品详情页")] public ItemTooltip _itemTooltip;
         [Header("背包状态")] [SerializeField] private GameObject bagUI;
         private bool bagOpenned;
         
