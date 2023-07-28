@@ -24,3 +24,8 @@ public enum PartName
 {
     Body,Hair,Arm,Tool,
 }
+
+public enum Season
+{
+    春,夏,秋,冬
+}
