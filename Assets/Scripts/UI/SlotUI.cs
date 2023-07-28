@@ -71,9 +71,19 @@ namespace WzFarm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (itemAmount == 0)
+            {
+                return;
+            }
+            
             //点击高亮
             isSelected = !isSelected;
             _inventoryUI.UpdateSlotHightlight(this.slotIndex);
+
+            if (slotType == SlotType.Bag)
+            {
+                EventHandler.CallItemSelectedEvent(_ItemDetails,isSelected);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)

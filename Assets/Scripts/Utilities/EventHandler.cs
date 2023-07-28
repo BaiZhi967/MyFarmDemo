@@ -6,7 +6,9 @@ using UnityEngine;
 public static class EventHandler
 {
     public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
-    public static event Action<int, Vector3> InstantiateItemInScene;
+   
+    
+    
 
     /// <summary>
     /// 呼叫UI事件中心
@@ -17,9 +19,16 @@ public static class EventHandler
     {
         UpdateInventoryUI?.Invoke(location,list);
     }
-
+    public static event Action<int, Vector3> InstantiateItemInScene;
     public static void CallInstantiateItemInScene(int itemID, Vector3 pos)
     {
         InstantiateItemInScene?.Invoke(itemID,pos);
+    }
+
+    public static event Action<ItemDetails, bool> ItemSelectedEvent;
+
+    public static void CallItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
+    {
+        ItemSelectedEvent?.Invoke(itemDetails,isSelected);
     }
 }
