@@ -69,7 +69,7 @@ MonoBehaviour:
     itemDescription: "\u841D\u535C"
     itemUseRadius: 0
     canPickedup: 1
-    canDropped: 0
+    canDropped: 1
     canCarried: 1
     itemPrice: 0
     sellPercentage: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     itemDescription: 
     itemUseRadius: 0
     canPickedup: 1
-    canDropped: 0
+    canDropped: 1
     canCarried: 1
     itemPrice: 0
     sellPercentage: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     itemDescription: "\u8461\u8404"
     itemUseRadius: 0
     canPickedup: 1
-    canDropped: 0
+    canDropped: 1
     canCarried: 1
     itemPrice: 0
     sellPercentage: 0

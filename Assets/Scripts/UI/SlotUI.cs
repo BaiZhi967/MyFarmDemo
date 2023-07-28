@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
@@ -42,6 +43,11 @@ namespace WzFarm.Inventory
         /// <param name="amount">物品数量</param>
         public void UpdateSlot(ItemDetails item,int amount)
         {
+            if (amount == 0)
+            {
+                UpdateEmptySlot();
+                return;
+            }
             _ItemDetails = item;
             slotImage.sprite = item.itemIcon;
             itemAmount = amount;
@@ -97,7 +103,7 @@ namespace WzFarm.Inventory
                     return;
                 }
                 
-                //交换物品
+                //背包中交换物品
                 var targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
                 int targetIndex = targetSlot.slotIndex;
                 if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Bag)
@@ -108,6 +114,19 @@ namespace WzFarm.Inventory
                 }
 
 
+            }
+            else
+            {
+                if (_ItemDetails.canDropped)
+                {
+                    var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
+                        -Camera.main.transform.position.z));
+                    EventHandler.CallInstantiateItemInScene(_ItemDetails.itemID,pos);
+                    //this.itemAmount--;
+                    //InventoryManager.Instance.PlayerBag.itemList[slotIndex].itemAmount--;
+                    //UpdateSlot(_ItemDetails,this.itemAmount);
+                    //TODO:从玩家背包减少该物品数量
+                }
             }
             
         }
