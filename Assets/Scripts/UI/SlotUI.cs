@@ -64,7 +64,9 @@ namespace WzFarm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            //TODO:点击高亮
+            //点击高亮
+            isSelected = !isSelected;
+            _inventoryUI.UpdateSlotHightlight(this.slotIndex);
         }
     }
 

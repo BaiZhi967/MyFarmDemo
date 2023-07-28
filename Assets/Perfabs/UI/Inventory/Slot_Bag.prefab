@@ -444,3 +444,4 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   itemAmount: 0
+  slotIndex: 0
