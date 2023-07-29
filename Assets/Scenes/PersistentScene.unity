@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09b358da7d40de4f89406bac26c5822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSceneName: 02.Home
+  startSceneName: PersistentScene
 --- !u!4 &399995033
 Transform:
   m_ObjectHideFlags: 0
