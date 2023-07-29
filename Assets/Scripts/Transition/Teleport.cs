@@ -7,7 +7,7 @@ namespace WzFarm.Transition
 {
     public class Teleport : MonoBehaviour
     {
-        [SceneName]
+        //[SceneName]
         public string sceneToGo;
         public Vector3 positionToGo;
 
