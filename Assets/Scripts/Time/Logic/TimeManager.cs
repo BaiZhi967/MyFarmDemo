@@ -80,7 +80,7 @@ public class TimeManager : MonoBehaviour
 
                             if (gameYear > 9999)
                             {
-                                gameYear = 2022;
+                                gameYear = 2023;
                             }
                         }
                     }

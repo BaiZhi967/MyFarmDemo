@@ -6,9 +6,15 @@ using Cinemachine;
 
 public class SwitchBounds : MonoBehaviour
 {
-    private void Start()
+
+    private void OnEnable()
     {
-        SwitchConfinerShape();
+        EventHandler.AfterSceneLoadedEvent += SwitchConfinerShape;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.AfterSceneLoadedEvent -= SwitchConfinerShape;
     }
 
     private void SwitchConfinerShape()
