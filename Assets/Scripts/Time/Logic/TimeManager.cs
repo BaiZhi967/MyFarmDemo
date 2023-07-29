@@ -17,6 +17,12 @@ public class TimeManager : MonoBehaviour
         NewGameTime();
     }
 
+    private void Start()
+    {
+        EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
+        EventHandler.CallGameDateEvent(gameHour,gameDay,gameMonth,gameYear,gameSeason);
+    }
+
     private void Update()
     {
         if (!gameClockPause)
@@ -79,7 +85,10 @@ public class TimeManager : MonoBehaviour
                         }
                     }
                 }
+                EventHandler.CallGameDateEvent(gameHour,gameDay,gameMonth,gameYear,gameSeason);
             }
+
+            EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
         }
         //Debug.Log("Second: " + gameSecond + " Minute: " + gameMinute);
     }
@@ -93,5 +102,6 @@ public class TimeManager : MonoBehaviour
         gameMonth = 1;
         gameYear = 2023;
         gameSeason = Season.春;
+        
     }
 }

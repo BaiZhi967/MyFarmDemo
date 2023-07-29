@@ -1730,7 +1730,7 @@ GameObject:
   - component: {fileID: 686178524}
   - component: {fileID: 686178523}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6211,6 +6211,7 @@ GameObject:
   - component: {fileID: 1740414822}
   - component: {fileID: 1740414824}
   - component: {fileID: 1740414823}
+  - component: {fileID: 1740414825}
   m_Layer: 5
   m_Name: Game Time
   m_TagString: Untagged
@@ -6241,7 +6242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 75, y: 74}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1740414823
@@ -6282,6 +6283,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740414821}
   m_CullTransparentMesh: 1
+--- !u!114 &1740414825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740414821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a96beafaa4fd094b82adbb4a261b12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayNightImage: {fileID: 1620121071}
+  clockParent: {fileID: 916294976}
+  seasonImage: {fileID: 1354267356}
+  dateText: {fileID: 579620702}
+  timeText: {fileID: 722198564}
+  seasonSprites:
+  - {fileID: 21300000, guid: 8b9910d91179b4a099ab476320fa5ae7, type: 3}
+  - {fileID: 21300000, guid: 9a3bd1653028b428e882fa7ea297e736, type: 3}
+  - {fileID: 21300000, guid: a94f97806ef1a4a20ad529791fc938a5, type: 3}
+  - {fileID: 21300000, guid: cf64f70ccd4ea4cb3948f885a2e21562, type: 3}
 --- !u!114 &1749548757 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 924557826582609370, guid: 64e54b0ace95108469d3f683a907c011, type: 3}
