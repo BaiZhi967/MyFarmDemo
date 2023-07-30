@@ -47,7 +47,7 @@ public class SerializableVector3
         this.z = pos.z;
     }
 
-    public Vector3 ToVector()
+    public Vector3 ToVector3()
     {
         return new Vector3(x, y, z);
     }

@@ -8,7 +8,7 @@ namespace WzFarm.Transition
 {
     public class TransitionManager : MonoBehaviour
     {
-        
+        [SceneName]
         public string startSceneName = String.Empty;
         private bool isFade;
         private CanvasGroup fadeCanvasGroup;
