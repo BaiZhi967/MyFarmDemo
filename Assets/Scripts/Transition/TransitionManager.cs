@@ -12,10 +12,12 @@ namespace WzFarm.Transition
         public string startSceneName = String.Empty;
         private bool isFade;
         private CanvasGroup fadeCanvasGroup;
-        private void Start()
+        private IEnumerator Start()
         {
-            StartCoroutine(LoadSceneSetActive(startSceneName));
             fadeCanvasGroup = FindObjectOfType<CanvasGroup>();
+            yield return LoadSceneSetActive(startSceneName);
+            EventHandler.CallAfterSceneLoadedEvent();
+
         }
 
         private void OnEnable()

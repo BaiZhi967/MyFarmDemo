@@ -11,18 +11,38 @@ public class CursorManager : MonoBehaviour
     private Sprite currentSprite;
     private Image cursorImage;
     private RectTransform cursorCanvas;
+    //鼠标检测
+    private Camera mainCamera;
+    private Grid currentGrid;
+    private Vector3 mouseWorldPos;
+    private Vector3Int mouseGirdPos;
+    private bool cursorEnable;
 
     private void OnEnable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
     }
 
-    
+    private void OnBeforeSceneUnloadEvent()
+    {
+        cursorEnable = false;
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        currentGrid = FindObjectOfType<Grid>();
+        cursorEnable = true;
+    }
+
 
     private void Start()
     {
@@ -30,6 +50,8 @@ public class CursorManager : MonoBehaviour
         cursorImage = cursorCanvas.GetChild(0).GetComponent<Image>();
         currentSprite = normal;
         SetCursorImage(normal);
+        
+        mainCamera = Camera.main;
     }
 
 
@@ -41,13 +63,14 @@ public class CursorManager : MonoBehaviour
         }
 
         cursorImage.transform.position = Input.mousePosition;
-        if (InteractWiteUI())
+        if (cursorEnable && !InteractWiteUI())
         {
-            SetCursorImage(normal);
+            SetCursorImage(currentSprite);
+            CheckCursorValid();
         }
         else
         {
-            SetCursorImage(currentSprite);
+            SetCursorImage(normal);
         }
     }
 
@@ -85,6 +108,12 @@ public class CursorManager : MonoBehaviour
                 _ => normal,
             };
         }
+    }
+
+    private void CheckCursorValid()
+    {
+        mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,-mainCamera.transform.position.z));
+        mouseGirdPos = currentGrid.WorldToCell(mouseWorldPos);
     }
 
     /// <summary>
