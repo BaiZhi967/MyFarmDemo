@@ -29,3 +29,8 @@ public enum Season
 {
     春,夏,秋,冬
 }
+
+public enum GridType
+{
+    Diggable,DropItem,PlaceFurniture,NPCObstacle
+}
