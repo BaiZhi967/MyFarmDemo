@@ -84,6 +84,16 @@ public class CursorManager : MonoBehaviour
         cursorImage.sprite = sprite;
         cursorImage.color = new Color(1, 1, 1, 1);
     }
+
+    private void SetCursorValid()
+    {
+        cursorImage.color = new Color(1, 1, 1, 1);
+    }
+    
+    private void SetCursorInValid()
+    {
+        cursorImage.color = new Color(1, 0, 0, 0.5f);
+    }
     
     
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
