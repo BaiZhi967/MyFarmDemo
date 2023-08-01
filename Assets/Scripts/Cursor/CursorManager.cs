@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using WzFarm.Map;
 
 public class CursorManager : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class CursorManager : MonoBehaviour
     private Vector3 mouseWorldPos;
     private Vector3Int mouseGirdPos;
     private bool cursorEnable;
+    private bool cursorPositionValid;
+
+    private ItemDetails currentItem;
+
+    private Transform PlayerTransform => FindObjectOfType<Player>().transform;
 
     private void OnEnable()
     {
@@ -40,7 +46,7 @@ public class CursorManager : MonoBehaviour
     private void OnAfterSceneLoadedEvent()
     {
         currentGrid = FindObjectOfType<Grid>();
-        cursorEnable = true;
+        //cursorEnable = true;
     }
 
 
@@ -63,7 +69,7 @@ public class CursorManager : MonoBehaviour
         }
 
         cursorImage.transform.position = Input.mousePosition;
-        if (cursorEnable && !InteractWiteUI())
+        if (!InteractWiteUI()&&cursorEnable )
         {
             SetCursorImage(currentSprite);
             CheckCursorValid();
@@ -85,25 +91,42 @@ public class CursorManager : MonoBehaviour
         cursorImage.color = new Color(1, 1, 1, 1);
     }
 
+    /// <summary>
+    /// 设置鼠标可用
+    /// </summary>
     private void SetCursorValid()
     {
+        cursorPositionValid = true;
         cursorImage.color = new Color(1, 1, 1, 1);
     }
     
+    /// <summary>
+    /// 设置鼠标不可用
+    /// </summary>
     private void SetCursorInValid()
     {
+        cursorPositionValid = false;
         cursorImage.color = new Color(1, 0, 0, 0.5f);
+        //Debug.Log("Now Red");
     }
     
     
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
     {
+
+        
+        
         if (!isSelected)
         {
+            currentItem = null;
+            cursorEnable = false;
             currentSprite = normal;
         }
         else
         {
+            
+            currentItem = itemDetails;
+            
             //WORKFLOW:添加所有对应的图片
             currentSprite = itemDetails.itemType switch
             {
@@ -117,6 +140,7 @@ public class CursorManager : MonoBehaviour
                 ItemType.Furniture => tool,
                 _ => normal,
             };
+            cursorEnable = true;
         }
     }
 
@@ -124,6 +148,43 @@ public class CursorManager : MonoBehaviour
     {
         mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,-mainCamera.transform.position.z));
         mouseGirdPos = currentGrid.WorldToCell(mouseWorldPos);
+
+        var playerGridPos = currentGrid.WorldToCell(PlayerTransform.position);
+        
+        //判断在使用范围内
+
+        if (Mathf.Abs(mouseGirdPos.x - playerGridPos.x) >currentItem.itemUseRadius || Mathf.Abs(mouseGirdPos.y - playerGridPos.y) > currentItem.itemUseRadius)
+        {
+            SetCursorInValid();
+            return;
+        }
+
+        TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGirdPos);
+    
+        //Debug.Log(mouseGirdPos);
+        //Debug.Log(currentTile);
+        if (currentTile != null)
+        {
+            switch (currentItem.itemType)
+            {
+                case ItemType.Commodity:
+                    if (currentTile.canDropItem && currentItem.canDropped)
+                    {
+                        SetCursorValid();
+                    }
+                    else
+                    {
+                        //Debug.Log("Red Now");
+                        SetCursorInValid();
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            //Debug.Log("Red Now null");
+            SetCursorInValid();
+        }
     }
 
     /// <summary>

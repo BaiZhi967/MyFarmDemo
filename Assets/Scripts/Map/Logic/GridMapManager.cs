@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace WzFarm.Map
 {
-    public class GridMapManager : MonoBehaviour
+    public class GridMapManager : Singleton<GridMapManager>
     {
         [Header("地图信息")]
         public List<MapData_SO> mapDataList;
@@ -36,6 +37,7 @@ namespace WzFarm.Map
 
                 //字典的Key
                 string key = tileDetails.girdX + "x" + tileDetails.gridY + "y" + mapData.sceneName;
+                //Debug.Log(key);
 
                 if (GetTileDetails(key) != null)
                 {
@@ -78,6 +80,14 @@ namespace WzFarm.Map
                 return tileDetailsDict[key];
             }
             return null;
+        }
+
+
+        public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPos)
+        {
+            string key = mouseGridPos.x + "x" + mouseGridPos.y + "y" + SceneManager.GetActiveScene().name;
+            //Debug.Log(key);
+            return GetTileDetails(key);
         }
     }
 }
