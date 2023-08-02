@@ -834,7 +834,7 @@ MonoBehaviour:
   waterTile: {fileID: 11400000, guid: fea62d83eb30cdb4abb9d4e053d2e309, type: 2}
   mapDataList:
   - {fileID: 11400000, guid: d09ce00a2ef9d96408653b498321111c, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 35858c44be2af3c498e93ccafadce112, type: 2}
 --- !u!4 &1075100798
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,7 +1502,7 @@ Animator:
   m_GameObject: {fileID: 1954484646}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 273677e38e697874c8cea68951a3135b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
