@@ -45,7 +45,7 @@ public class ItemTooltip : MonoBehaviour
             ItemType.Furniture => "家具",
             ItemType.BreakTool => "工具",
             ItemType.ChopTool => "工具",
-            ItemType.CollecTool => "工具",
+            ItemType.CollectTool => "工具",
             ItemType.HoeTool => "工具",
             ItemType.ReapTool => "工具",
             ItemType.WaterTool => "工具",

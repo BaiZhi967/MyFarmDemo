@@ -50,4 +50,33 @@ public class CropDetails
     public bool hasParticalEffect;
     //TODO:特效 音效 等
 
+
+    /// <summary>
+    /// 检测工具是否可用
+    /// </summary>
+    /// <param name="toolID">工具id</param>
+    /// <returns>是否可用</returns>
+    public bool CheckToolAvailable(int toolID)
+    {
+        foreach (var id in harvestToolItemID)
+        {
+            if (id == toolID) return true;
+        }
+
+        return false;
+    }
+
+    public int GetTotalRequireCount(int toolID)
+    {
+        for (int i = 0; i < harvestToolItemID.Length; i++)
+        {
+            if (harvestToolItemID[i] == toolID)
+            {
+                return requireActionCount[i];
+            }
+        }
+
+        return -1;
+    }
+
 }

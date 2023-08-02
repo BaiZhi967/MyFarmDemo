@@ -160,9 +160,9 @@ namespace WzFarm.Map
                         currentTile.daysSinceWatered = 0;
                         //音效
                         break;
-                    case ItemType.CollecTool:
+                    case ItemType.CollectTool:
                         Crop currentCrop =  GetCropObject(mouseWorldPos);
-                        //TODO:执行crop收割方法
+                        currentCrop.ProcessToolAction(itemDetails);
                         break;
                 }
 

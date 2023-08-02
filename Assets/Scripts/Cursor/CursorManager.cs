@@ -149,7 +149,7 @@ public class CursorManager : MonoBehaviour
                 ItemType.BreakTool => tool,
                 ItemType.ReapTool => tool,
                 ItemType.Furniture => tool,
-                ItemType.CollecTool =>tool,
+                ItemType.CollectTool =>tool,
                 _ => normal,
             };
             cursorEnable = true;
@@ -177,7 +177,8 @@ public class CursorManager : MonoBehaviour
         //Debug.Log(currentTile);
         if (currentTile != null)
         {
-            CropDetails currenCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+            CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+            //WORKFLOW:补充所有物品类型的判断
             switch (currentItem.itemType)
             {
                     
@@ -221,17 +222,22 @@ public class CursorManager : MonoBehaviour
                         SetCursorInValid();
                     }
                     break;
-                case ItemType.CollecTool:
-                    if (currenCrop != null)
+                case ItemType.CollectTool:
+                    if (currentCrop != null)
                     {
-                        if (currentTile.growthDays >= currenCrop.TotalGrowthDays)
+                        if (currentCrop.CheckToolAvailable(currentItem.itemID))
                         {
-                            SetCursorValid();
+                            if (currentTile.growthDays >= currentCrop.TotalGrowthDays)
+                            {
+                                SetCursorValid();
+                            }
+                            else
+                            {
+                                SetCursorInValid();
+                            }
                         }
-                        else
-                        {
-                            SetCursorInValid();
-                        }
+                        
+                        
                     }else
                     {
                         SetCursorInValid();
@@ -259,4 +265,6 @@ public class CursorManager : MonoBehaviour
 
         return false;
     }
+    
+    
 }

@@ -22,6 +22,7 @@ namespace WzFarm.Inventory
         private void OnEnable()
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
         }
 
     
@@ -29,11 +30,22 @@ namespace WzFarm.Inventory
         private void OnDisable()
         {
             EventHandler.DropItemEvent -= OnDropItemEvent;
+            EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+        }
+
+        private void OnHarvestAtPlayerPosition(int itemID)
+        {
+            var index = GetItemIndexInBag(itemID);
+            AddItemAtIndex(itemID,index,1);
+            //更新UI
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
         }
 
         private void OnDropItemEvent(int itemID, Vector3 pos,ItemType itemType)
         {
             RemoveItem(itemID,1);
+            //更新UI
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
         }
 
 
