@@ -84,6 +84,7 @@ public class TimeManager : MonoBehaviour
                             }
                         }
                     }
+                    EventHandler.CallGameDayEvent(gameDay,gameSeason);
                 }
                 EventHandler.CallGameDateEvent(gameHour,gameDay,gameMonth,gameYear,gameSeason);
             }
