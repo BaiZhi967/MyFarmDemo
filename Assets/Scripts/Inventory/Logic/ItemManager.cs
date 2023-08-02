@@ -8,7 +8,9 @@ using WzFarm.Inventory;
 public class ItemManager : MonoBehaviour
 {
     public Item itemPrefab;
+    public Item bouncePrefab;
     private Transform itemParent;
+    private Transform playerTrans =>FindObjectOfType<Player>().transform;
 
     public Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
 
@@ -52,8 +54,10 @@ public class ItemManager : MonoBehaviour
     private void OnDropItemEvent(int itemID, Vector3 pos)
     {
         //todo:扔东西
-        var item = Instantiate(itemPrefab, pos, Quaternion.identity,itemParent);
+        var item = Instantiate(bouncePrefab, playerTrans.position, Quaternion.identity,itemParent);
         item.itemID = itemID;
+        var dir = (pos - playerTrans.position).normalized;
+        item.GetComponent<ItemBounce>().InitBounceItem(pos,dir);
     }
 
     /// <summary>

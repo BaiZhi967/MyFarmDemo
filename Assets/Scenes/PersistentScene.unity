@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 7856380277147560622, guid: 92e340dc54ccdac46bde40488ddd464a, type: 3}
+  bouncePrefab: {fileID: 7061896730922087691, guid: 1c5430cfac5e36846b50180b7dbde34b, type: 3}
 --- !u!4 &894314103
 Transform:
   m_ObjectHideFlags: 0
