@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     private bool isMoving = false;
     private bool inputDisable;
 
+    //使用工具
+    private float mouseX;
+    private float mouseY;
+    private bool useTool;
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -39,7 +43,47 @@ public class Player : MonoBehaviour
     private void OnMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
     {
         //todo:执行动画
-        EventHandler.CallExecuteActionAfterAnimation(pos, itemDetails);
+
+        if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commodity &&
+            itemDetails.itemType != ItemType.Furniture)
+        {
+            mouseX = pos.x - transform.position.x;
+            mouseY = pos.y - transform.position.y;
+            if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+            {
+                mouseY = 0;
+            }
+            else
+            {
+                mouseX = 0;
+            }
+
+            StartCoroutine(UseToolRoutine(pos, itemDetails));
+        }
+        else
+        {
+            EventHandler.CallExecuteActionAfterAnimation(pos, itemDetails);
+        }
+
+    }
+
+    private IEnumerator UseToolRoutine(Vector3 mousePosition, ItemDetails itemDetails)
+    {
+        useTool = true;
+        inputDisable = true;
+        yield return null;
+        foreach (var anim in _animators)
+        {
+            anim.SetTrigger("useTool");
+            anim.SetFloat("InputX",mouseX);
+            anim.SetFloat("InputY",mouseY);
+        }
+
+        yield return new WaitForSeconds(0.45f);
+        EventHandler.CallExecuteActionAfterAnimation(mousePosition,itemDetails);
+        yield return new WaitForSeconds(0.25f);
+        useTool = false;
+        inputDisable = false;
     }
     
     private void OnMoveToPosition(Vector3 pos)
@@ -108,6 +152,8 @@ public class Player : MonoBehaviour
         foreach (var animator in _animators)
         {
             animator.SetBool("isMoving",isMoving);
+            animator.SetFloat("mouseX",mouseX);
+            animator.SetFloat("mouseY",mouseY);
             if (isMoving)
             {
                 animator.SetFloat("InputX",inputX);

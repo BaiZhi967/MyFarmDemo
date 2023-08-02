@@ -46,6 +46,7 @@ public class AnimationOverride : MonoBehaviour
         {
             ItemType.Seed => PartType.Carry,
             ItemType.Commodity => PartType.Carry,
+            ItemType.HoeTool => PartType.Hoe,
             _ => PartType.None
         };
         holdItem.enabled = false;
