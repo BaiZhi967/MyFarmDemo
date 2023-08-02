@@ -30,7 +30,7 @@ namespace WzFarm.Inventory
         private void Start()
         {
             isSelected = false;
-            if (_ItemDetails.itemID == 0)
+            if (_ItemDetails  == null)
             {
                 UpdateEmptySlot();
             }
@@ -63,7 +63,14 @@ namespace WzFarm.Inventory
         /// </summary>
         public void UpdateEmptySlot()
         {
-            if (isSelected) isSelected = !isSelected;
+            if (isSelected)
+            {
+                isSelected = false;
+                _inventoryUI.UpdateSlotHightlight(-1);
+                EventHandler.CallItemSelectedEvent(_ItemDetails,isSelected);
+            }
+
+            _ItemDetails = null;
             slotImage.enabled = false;
             amontText.text = String.Empty;
             _button.interactable = false;
@@ -71,7 +78,7 @@ namespace WzFarm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (itemAmount == 0)
+            if (_ItemDetails== null)
             {
                 return;
             }

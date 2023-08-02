@@ -18,8 +18,24 @@ namespace WzFarm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
             
         }
-
         
+        private void OnEnable()
+        {
+            EventHandler.DropItemEvent += OnDropItemEvent;
+        }
+
+    
+
+        private void OnDisable()
+        {
+            EventHandler.DropItemEvent -= OnDropItemEvent;
+        }
+
+        private void OnDropItemEvent(int itemID, Vector3 pos)
+        {
+            RemoveItem(itemID,1);
+        }
+
 
         /// <summary>
         /// 通过ID查找物品
@@ -137,6 +153,30 @@ namespace WzFarm.Inventory
                 PlayerBag.itemList[fromIndex] = new InventoryItem();
             }
             
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
+        }
+        
+        /// <summary>
+        /// 移除指定数量的背包物品
+        /// </summary>
+        /// <param name="ID">物品ID</param>
+        /// <param name="removeAmount">数量</param>
+        private void RemoveItem(int ID, int removeAmount)
+        {
+            var index = GetItemIndexInBag(ID);
+
+            if (PlayerBag.itemList[index].itemAmount > removeAmount)
+            {
+                var amount = PlayerBag.itemList[index].itemAmount - removeAmount;
+                var item = new InventoryItem { itemID = ID, itemAmount = amount };
+                PlayerBag.itemList[index] = item;
+            }
+            else if (PlayerBag.itemList[index].itemAmount == removeAmount)
+            {
+                var item = new InventoryItem();
+                PlayerBag.itemList[index] = item;
+            }
+
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
         }
 

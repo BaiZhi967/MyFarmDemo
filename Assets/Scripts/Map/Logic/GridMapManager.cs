@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace WzFarm.Map
         //场景名字+坐标和对应的瓦片信息
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
 
+        private Grid currentGrid;
+
         private void Start()
         {
             foreach (var mapData in mapDataList)
@@ -20,6 +23,26 @@ namespace WzFarm.Map
                 InitTileDetailsDict(mapData);
             }
         }
+
+        private void OnEnable()
+        {
+            EventHandler.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
+            EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+        }
+
+        private void OnAfterSceneLoadedEvent()
+        {
+            currentGrid = FindObjectOfType<Grid>();
+        }
+
+
+        private void OnDisable()
+        {
+            EventHandler.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
+            EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+        }
+        
+        
 
         /// <summary>
         /// 根据地图信息生成字典
@@ -88,6 +111,24 @@ namespace WzFarm.Map
             string key = mouseGridPos.x + "x" + mouseGridPos.y + "y" + SceneManager.GetActiveScene().name;
             //Debug.Log(key);
             return GetTileDetails(key);
+        }
+        
+        private void OnExecuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)
+        {
+            var mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
+            var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
+
+            if (currentTile != null)
+            {
+                //WORKFLOW:物品使用实际功能
+                switch (itemDetails.itemType)
+                {
+                    case ItemType.Commodity:
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos);
+                        break;
+                }
+            }
+
         }
     }
 }

@@ -15,13 +15,17 @@ public class ItemManager : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+        EventHandler.DropItemEvent += OnDropItemEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
     }
 
+    
+
     private void OnDisable()
     {
         EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+        EventHandler.DropItemEvent -= OnDropItemEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
     }
@@ -43,6 +47,13 @@ public class ItemManager : MonoBehaviour
         var item = Instantiate(itemPrefab, pos, Quaternion.identity,itemParent);
         item.itemID = itemID;
 
+    }
+    
+    private void OnDropItemEvent(int itemID, Vector3 pos)
+    {
+        //todo:扔东西
+        var item = Instantiate(itemPrefab, pos, Quaternion.identity,itemParent);
+        item.itemID = itemID;
     }
 
     /// <summary>

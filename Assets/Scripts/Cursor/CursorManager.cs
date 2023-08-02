@@ -73,6 +73,7 @@ public class CursorManager : MonoBehaviour
         {
             SetCursorImage(currentSprite);
             CheckCursorValid();
+            CheckPlayerInput();
         }
         else
         {
@@ -80,6 +81,15 @@ public class CursorManager : MonoBehaviour
         }
     }
 
+
+    private void CheckPlayerInput()
+    {
+        if (Input.GetMouseButtonDown(0) && cursorPositionValid)
+        {
+            EventHandler.CallMouseClickedEvent(mouseWorldPos,currentItem);
+        }
+    }
+    
     
     /// <summary>
     /// 设置鼠标图片

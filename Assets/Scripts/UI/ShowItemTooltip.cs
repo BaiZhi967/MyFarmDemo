@@ -19,7 +19,7 @@ namespace WzFarm.Inventory
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (slotUI.itemAmount > 0)
+            if (slotUI._ItemDetails != null)
             {
                 _inventoryUI._itemTooltip.gameObject.SetActive(true);
                 _inventoryUI._itemTooltip.SetupTooltip(slotUI._ItemDetails,slotUI.slotType);
