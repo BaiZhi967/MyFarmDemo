@@ -86,4 +86,5 @@ public class TileDetails
     public int seedItemID = -1;
     public int growthDays = -1;
     public int daysSinceLastHarvest = -1;
+    public int daysSinceWatered = -1;
 }

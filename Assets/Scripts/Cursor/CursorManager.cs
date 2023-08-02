@@ -184,7 +184,26 @@ public class CursorManager : MonoBehaviour
                     }
                     else
                     {
-                        //Debug.Log("Red Now");
+                        SetCursorInValid();
+                    }
+                    break;
+                case ItemType.HoeTool:
+                    if (currentTile.canDig)
+                    {
+                        SetCursorValid();
+                    }
+                    else
+                    {
+                        SetCursorInValid();
+                    }
+                    break;
+                case ItemType.WaterTool:
+                    if (currentTile.daysSinceDug > -1 && currentTile.daysSinceWatered == -1)
+                    {
+                        SetCursorValid();
+                    }
+                    else
+                    {
                         SetCursorInValid();
                     }
                     break;
