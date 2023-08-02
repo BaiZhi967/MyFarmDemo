@@ -162,6 +162,7 @@ namespace WzFarm.Map
                         currentTile.daysSinceWatered = 0;
                         //音效
                         break;
+                    case ItemType.ChopTool:
                     case ItemType.CollectTool:
                         Crop currentCrop =  GetCropObject(mouseWorldPos);
                         currentCrop.ProcessToolAction(itemDetails,currentTile);

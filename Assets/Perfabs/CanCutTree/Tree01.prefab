@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 315766567869700192}
   - component: {fileID: 315766567869700193}
   - component: {fileID: 315766567869700199}
+  - component: {fileID: 8985919273260196995}
   m_Layer: 0
   m_Name: Tree01
   m_TagString: Untagged
@@ -72,6 +73,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.6787167, y: 5.581998}
   m_EdgeRadius: 0
+--- !u!114 &8985919273260196995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315766567869700194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8513c6422922a4dad86d9508b0756c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropDetails:
+    seedItemID: 0
+    growthDays: 
+    growthPrefabs: []
+    growthSprites: []
+    seasons: 
+    harvestToolItemID: 
+    requireActionCount: 
+    transferItemID: 0
+    producedItemID: 
+    producedMinAmount: 
+    producedMaxAmount: 
+    spawnRadius: {x: 0, y: 0}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticalEffect: 0
 --- !u!1 &315766567961003090
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +238,7 @@ GameObject:
   - component: {fileID: 315766568092294028}
   - component: {fileID: 315766568092294017}
   - component: {fileID: 315766568092294018}
+  - component: {fileID: 8961670572534289975}
   m_Layer: 0
   m_Name: Tree01_Top
   m_TagString: Untagged
@@ -293,3 +325,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654e515520aa2c6469b8c94e6b11cf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8961670572534289975
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315766568092294029}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12098dc04b61f474f8e40776d1fd86a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

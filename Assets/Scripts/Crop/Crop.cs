@@ -8,6 +8,8 @@ public class Crop : MonoBehaviour
 
     private int harvestActionCount;
     private TileDetails _tileDetails;
+    private Animator _animator;
+    private Transform PlayerTransform => FindObjectOfType<Player>().transform;
     public void ProcessToolAction(ItemDetails tool,TileDetails tile)
     {
         _tileDetails = tile;
@@ -15,14 +17,28 @@ public class Crop : MonoBehaviour
         //工具使用次数
         int requireActionCount = cropDetails.GetTotalRequireCount(tool.itemID);
         if(requireActionCount == -1) return;
+        _animator = GetComponentInChildren<Animator>();
         
-        //判断是否有动画 例:树木
-        
+        Debug.Log(111);
         //点击计数器
         if (harvestActionCount < requireActionCount)
         {
             harvestActionCount++;
             //播放声音、特效
+            if (_animator != null && cropDetails.hasAnimation)
+            {
+                Debug.Log(222);
+                if (PlayerTransform.position.x < transform.position.x)
+                {
+                    _animator.SetTrigger("RotateRight");
+                }
+                else
+                {
+                    _animator.SetTrigger("RotateLeft");
+                }
+            }
+            //判断是否有动画 例:树木
+            
         }
 
         if (harvestActionCount >= requireActionCount)
@@ -31,6 +47,9 @@ public class Crop : MonoBehaviour
             {
                 //生成农作物
                 SpwanHarvestItems();
+            }else if (cropDetails.hasAnimation)
+            {
+                
             }
         }
         
