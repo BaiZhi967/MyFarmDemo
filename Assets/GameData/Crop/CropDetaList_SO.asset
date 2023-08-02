@@ -37,6 +37,6 @@ MonoBehaviour:
     spawnRadius: {x: 0, y: 0}
     daysToRegrow: 0
     regrowTimes: 0
-    generateAtPlayerPosition: 0
+    generateAtPlayerPosition: 1
     hasAnimation: 0
     hasParticalEffect: 0
