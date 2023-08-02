@@ -58,7 +58,8 @@ namespace WzFarm.Map
             digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             waterTilemap =GameObject.FindWithTag("Water").GetComponent<Tilemap>();
             
-            DisplayMap(SceneManager.GetActiveScene().name);
+            //DisplayMap(SceneManager.GetActiveScene().name);
+            RefreshMap();
         }
 
         /// <summary>
