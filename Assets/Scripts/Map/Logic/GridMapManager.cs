@@ -40,6 +40,7 @@ namespace WzFarm.Map
             EventHandler.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventHandler.GameDayEvent += OnGameDayEvent;
+            EventHandler.RefreshCurrentMap += RefreshMap;
         }
 
         
@@ -50,6 +51,7 @@ namespace WzFarm.Map
             EventHandler.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventHandler.GameDayEvent -= OnGameDayEvent;
+            EventHandler.RefreshCurrentMap -= RefreshMap;
         }
         
         private void OnAfterSceneLoadedEvent()
@@ -162,7 +164,7 @@ namespace WzFarm.Map
                         break;
                     case ItemType.CollectTool:
                         Crop currentCrop =  GetCropObject(mouseWorldPos);
-                        currentCrop.ProcessToolAction(itemDetails);
+                        currentCrop.ProcessToolAction(itemDetails,currentTile);
                         break;
                 }
 
