@@ -160,12 +160,37 @@ namespace WzFarm.Map
                         currentTile.daysSinceWatered = 0;
                         //音效
                         break;
+                    case ItemType.CollecTool:
+                        Crop currentCrop =  GetCropObject(mouseWorldPos);
+                        //TODO:执行crop收割方法
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
             }
 
         }
+        
+        /// <summary>
+        /// 通过物理方法判断鼠标点击位置的农作物
+        /// </summary>
+        /// <param name="mouseWorldPos">鼠标坐标</param>
+        /// <returns></returns>
+        private Crop GetCropObject(Vector3 mouseWorldPos)
+        {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
+
+            Crop currentCrop = null;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].GetComponent<Crop>())
+                    currentCrop = colliders[i].GetComponent<Crop>();
+            }
+            return currentCrop;
+        }
+        
+        
         /// <summary>
         /// 每天执行1次
         /// </summary>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace WzFarm.CropPlant
 {
-    public class CropManager : MonoBehaviour
+    public class CropManager : Singleton<CropManager>
     {
         public CropDetaList_SO cropData;
         private Transform cropParent;
@@ -86,6 +86,7 @@ namespace WzFarm.CropPlant
 
             GameObject cropInstance = Instantiate(cropPrefab, pos, Quaternion.identity, cropParent);
             cropInstance.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
+            cropInstance.GetComponent<Crop>().cropDetails = cropDetails;
         }
         
         
@@ -94,7 +95,7 @@ namespace WzFarm.CropPlant
         /// </summary>
         /// <param name="id">种子id</param>
         /// <returns>种子信息</returns>
-        private CropDetails GetCropDetails(int id)
+        public CropDetails GetCropDetails(int id)
         {
             return cropData.CropDetailsList.Find(c=>c.seedItemID == id);
         }

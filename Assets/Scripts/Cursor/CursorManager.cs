@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using WzFarm.CropPlant;
 using WzFarm.Map;
 
 public class CursorManager : MonoBehaviour
@@ -148,6 +149,7 @@ public class CursorManager : MonoBehaviour
                 ItemType.BreakTool => tool,
                 ItemType.ReapTool => tool,
                 ItemType.Furniture => tool,
+                ItemType.CollecTool =>tool,
                 _ => normal,
             };
             cursorEnable = true;
@@ -175,8 +177,10 @@ public class CursorManager : MonoBehaviour
         //Debug.Log(currentTile);
         if (currentTile != null)
         {
+            CropDetails currenCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
             switch (currentItem.itemType)
             {
+                    
                 case ItemType.Seed:
                     if (currentTile.daysSinceDug > -1 && currentTile.seedItemID == -1)
                     {
@@ -213,6 +217,22 @@ public class CursorManager : MonoBehaviour
                         SetCursorValid();
                     }
                     else
+                    {
+                        SetCursorInValid();
+                    }
+                    break;
+                case ItemType.CollecTool:
+                    if (currenCrop != null)
+                    {
+                        if (currentTile.growthDays >= currenCrop.TotalGrowthDays)
+                        {
+                            SetCursorValid();
+                        }
+                        else
+                        {
+                            SetCursorInValid();
+                        }
+                    }else
                     {
                         SetCursorInValid();
                     }

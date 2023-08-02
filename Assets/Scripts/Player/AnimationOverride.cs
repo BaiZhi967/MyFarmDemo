@@ -48,6 +48,7 @@ public class AnimationOverride : MonoBehaviour
             ItemType.Commodity => PartType.Carry,
             ItemType.HoeTool => PartType.Hoe,
             ItemType.WaterTool => PartType.Water,
+            ItemType.CollecTool => PartType.Collect,
             _ => PartType.None
         };
         holdItem.enabled = false;

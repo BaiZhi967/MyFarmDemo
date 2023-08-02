@@ -1450,6 +1450,15 @@ MonoBehaviour:
   - partType: 4
     partName: 3
     overrideController: {fileID: 22100000, guid: a5c9772cf83ecd845865333dd8b73e0e, type: 2}
+  - partType: 5
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 9625ea168304f9d41a58530ea3990fa5, type: 2}
+  - partType: 5
+    partName: 0
+    overrideController: {fileID: 22100000, guid: 9bbf3e9a21196d14489ca0598dfe10c5, type: 2}
+  - partType: 5
+    partName: 1
+    overrideController: {fileID: 22100000, guid: cb49619c0e6f2854787779691bbb96f5, type: 2}
 --- !u!1 &1954484646
 GameObject:
   m_ObjectHideFlags: 0
