@@ -34,6 +34,12 @@ public class TimeManager : MonoBehaviour
                 UpdateGameTime();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            gameDay++;
+            EventHandler.CallGameDayEvent(gameDay,gameSeason);
+        }
     }
 
     private void UpdateGameTime()

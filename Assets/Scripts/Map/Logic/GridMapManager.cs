@@ -143,9 +143,10 @@ namespace WzFarm.Map
                 {
                     case ItemType.Seed:
                         EventHandler.CallPlantSeedEvent(itemDetails.itemID,currentTile);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID,mouseWorldPos,itemDetails.itemType);
                         break;
                     case ItemType.Commodity:
-                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos,itemDetails.itemType);
                         break;
                     case ItemType.HoeTool:
                         SetDigGround(currentTile);
@@ -189,6 +190,11 @@ namespace WzFarm.Map
                 {
                     tile.Value.daysSinceDug = -1;
                     tile.Value.canDig = true;
+                }
+
+                if (tile.Value.seedItemID != -1)
+                {
+                    tile.Value.growthDays++;
                 }
             }
 
@@ -242,6 +248,11 @@ namespace WzFarm.Map
             if (waterTilemap != null)
                 waterTilemap.ClearAllTiles();
 
+            foreach (var crop in FindObjectsOfType<Crop>())
+            {
+                Destroy(crop.gameObject);
+            }
+
             DisplayMap(SceneManager.GetActiveScene().name);
         }
 
@@ -263,7 +274,10 @@ namespace WzFarm.Map
                         SetDigGround(tileDetails);
                     if (tileDetails.daysSinceWatered > -1)
                         SetWaterGround(tileDetails);
-                    //TODO:种子
+                    if (tileDetails.seedItemID != -1)
+                    {
+                       EventHandler.CallPlantSeedEvent(tileDetails.seedItemID,tileDetails);
+                    }
                 }
             }
         }

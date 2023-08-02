@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WzFarm.Crop
+namespace WzFarm.CropPlant
 {
     public class CropManager : MonoBehaviour
     {

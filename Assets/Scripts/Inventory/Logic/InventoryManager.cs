@@ -31,7 +31,7 @@ namespace WzFarm.Inventory
             EventHandler.DropItemEvent -= OnDropItemEvent;
         }
 
-        private void OnDropItemEvent(int itemID, Vector3 pos)
+        private void OnDropItemEvent(int itemID, Vector3 pos,ItemType itemType)
         {
             RemoveItem(itemID,1);
         }

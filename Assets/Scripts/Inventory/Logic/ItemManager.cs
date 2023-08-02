@@ -51,9 +51,12 @@ public class ItemManager : MonoBehaviour
 
     }
     
-    private void OnDropItemEvent(int itemID, Vector3 pos)
+    private void OnDropItemEvent(int itemID, Vector3 pos,ItemType itemType)
     {
-        //todo:扔东西
+        if (itemType == ItemType.Seed)
+        {
+            return;
+        }
         var item = Instantiate(bouncePrefab, playerTrans.position, Quaternion.identity,itemParent);
         item.itemID = itemID;
         var dir = (pos - playerTrans.position).normalized;
