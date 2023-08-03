@@ -137,9 +137,10 @@ namespace WzFarm.Map
         {
             var mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
             var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
-
+           
             if (currentTile != null)
             {
+                Crop currentCrop =  GetCropObject(mouseWorldPos);
                 //WORKFLOW:物品使用实际功能
                 switch (itemDetails.itemType)
                 {
@@ -162,11 +163,15 @@ namespace WzFarm.Map
                         currentTile.daysSinceWatered = 0;
                         //音效
                         break;
-                    case ItemType.ChopTool:
                     case ItemType.CollectTool:
-                        Crop currentCrop =  GetCropObject(mouseWorldPos);
+                        currentCrop =  GetCropObject(mouseWorldPos);
                         currentCrop.ProcessToolAction(itemDetails,currentTile);
                         break;
+                    case ItemType.ChopTool:
+                        currentCrop =  GetCropObject(mouseWorldPos);
+                        currentCrop.ProcessToolAction(itemDetails,currentCrop._tileDetails);
+                        break;
+                        
                 }
 
                 UpdateTileDetails(currentTile);
@@ -179,7 +184,7 @@ namespace WzFarm.Map
         /// </summary>
         /// <param name="mouseWorldPos">鼠标坐标</param>
         /// <returns></returns>
-        private Crop GetCropObject(Vector3 mouseWorldPos)
+        public Crop GetCropObject(Vector3 mouseWorldPos)
         {
             Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
 

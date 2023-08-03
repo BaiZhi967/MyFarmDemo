@@ -7,9 +7,10 @@ public class Crop : MonoBehaviour
     public CropDetails cropDetails;
 
     private int harvestActionCount;
-    private TileDetails _tileDetails;
+    public TileDetails _tileDetails;
     private Animator _animator;
     private Transform PlayerTransform => FindObjectOfType<Player>().transform;
+    public bool CanHavrest => _tileDetails.growthDays >= cropDetails.TotalGrowthDays;
     public void ProcessToolAction(ItemDetails tool,TileDetails tile)
     {
         _tileDetails = tile;

@@ -42,13 +42,18 @@ public class Player : MonoBehaviour
 
     private void OnMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
     {
+        if (useTool)
+        {
+            return;
+        }
+        
         //todo:执行动画
 
         if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commodity &&
             itemDetails.itemType != ItemType.Furniture)
         {
             mouseX = pos.x - transform.position.x;
-            mouseY = pos.y - transform.position.y;
+            mouseY = pos.y - (0.85f  + transform.position.y);
             if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
             {
                 mouseY = 0;
