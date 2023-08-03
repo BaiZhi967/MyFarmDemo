@@ -40,7 +40,10 @@ public class Crop : MonoBehaviour
             }
             
             //播放特效
-            EventHandler.CallParticleEffectEvent(cropDetails.effectType,transform.position+cropDetails.effectPos);
+            if (cropDetails.hasParticleEffect)
+            {
+                EventHandler.CallParticleEffectEvent(cropDetails.effectType,transform.position+cropDetails.effectPos);
+            }
             //播放声音
         }
 
