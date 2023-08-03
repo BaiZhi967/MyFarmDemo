@@ -20,7 +20,7 @@ public class Crop : MonoBehaviour
         if(requireActionCount == -1) return;
         _animator = GetComponentInChildren<Animator>();
         
-        Debug.Log(111);
+        //Debug.Log(111);
         //点击计数器
         if (harvestActionCount < requireActionCount)
         {
@@ -28,7 +28,7 @@ public class Crop : MonoBehaviour
             //播放声音、特效
             if (_animator != null && cropDetails.hasAnimation)
             {
-                Debug.Log(222);
+                //Debug.Log(222);
                 if (PlayerTransform.position.x < transform.position.x)
                 {
                     _animator.SetTrigger("RotateRight");
@@ -44,16 +44,47 @@ public class Crop : MonoBehaviour
 
         if (harvestActionCount >= requireActionCount)
         {
-            if (cropDetails.generateAtPlayerPosition)
+            if (cropDetails.generateAtPlayerPosition || !cropDetails.hasAnimation)
             {
                 //生成农作物
                 SpwanHarvestItems();
             }else if (cropDetails.hasAnimation)
             {
-                
+                if (PlayerTransform.position.x < transform.position.x)
+                {
+                    _animator.SetTrigger("FallingRight");
+                }
+                else
+                {
+                    _animator.SetTrigger("FallingLeft");
+                }
+
+                StartCoroutine(HarvestAfterAnimation());
             }
         }
         
+    }
+
+    private IEnumerator HarvestAfterAnimation()
+    {
+        while (_animator.GetCurrentAnimatorStateInfo(0).IsName("END") is false)
+        {
+            yield return null;
+        }
+        SpwanHarvestItems();
+        if (cropDetails.transferItemID > 0)
+        {
+            CreateTransferCrop();
+        }
+    }
+
+
+    private void CreateTransferCrop()
+    {
+        _tileDetails.seedItemID = cropDetails.transferItemID;
+        _tileDetails.daysSinceLastHarvest = -1;
+        _tileDetails.growthDays = 0;
+        EventHandler.CallRefreshCurrentMap();
     }
 
     public void SpwanHarvestItems()
@@ -73,6 +104,12 @@ public class Crop : MonoBehaviour
                 else
                 {
                     //生成在世界上
+                    var dirX = transform.position.x > PlayerTransform.position.x ? 1 : -1;
+                    var spwanPos =
+                        new Vector3(transform.position.x + Random.Range(dirX, cropDetails.spawnRadius.x * dirX),
+                            transform.position.y + Random.Range(-cropDetails.spawnRadius.y, cropDetails.spawnRadius.y),0);
+                    
+                    EventHandler.CallInstantiateItemInScene(cropDetails.producedItemID[i],spwanPos);
                 }
             }
         }

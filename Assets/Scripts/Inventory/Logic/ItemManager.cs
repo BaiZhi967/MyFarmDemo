@@ -46,8 +46,10 @@ public class ItemManager : MonoBehaviour
 
     private void OnInstantiateItemInScene(int itemID, Vector3 pos)
     {
-        var item = Instantiate(itemPrefab, pos, Quaternion.identity,itemParent);
+        var item = Instantiate(bouncePrefab, pos, Quaternion.identity,itemParent);
         item.itemID = itemID;
+        item.GetComponent<ItemBounce>().InitBounceItem(pos,Vector3.up);
+        
 
     }
     
