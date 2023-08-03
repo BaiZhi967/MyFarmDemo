@@ -25,7 +25,7 @@ public class Crop : MonoBehaviour
         if (harvestActionCount < requireActionCount)
         {
             harvestActionCount++;
-            //播放声音、特效
+            //判断是否有动画 例:树木
             if (_animator != null && cropDetails.hasAnimation)
             {
                 //Debug.Log(222);
@@ -38,8 +38,10 @@ public class Crop : MonoBehaviour
                     _animator.SetTrigger("RotateLeft");
                 }
             }
-            //判断是否有动画 例:树木
             
+            //播放特效
+            EventHandler.CallParticleEffectEvent(cropDetails.effectType,transform.position+cropDetails.effectPos);
+            //播放声音
         }
 
         if (harvestActionCount >= requireActionCount)

@@ -118,4 +118,11 @@ public static class EventHandler
     {
         RefreshCurrentMap?.Invoke();
     }
+    
+    public static event Action<ParticleEffectType,Vector3> ParticleEffectEvent;
+
+    public static void CallParticleEffectEvent(ParticleEffectType effectType, Vector3 pos)
+    {
+        ParticleEffectEvent?.Invoke(effectType,pos);
+    }
 }

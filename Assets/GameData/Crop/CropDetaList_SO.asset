@@ -39,8 +39,9 @@ MonoBehaviour:
     regrowTimes: 0
     generateAtPlayerPosition: 1
     hasAnimation: 0
-    hasParticalEffect: 0
+    hasParticleEffect: 0
     effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
   - seedItemID: 1004
     growthDays: 0100000002000000020000000300000003000000
     growthPrefabs:
@@ -67,8 +68,9 @@ MonoBehaviour:
     regrowTimes: 2
     generateAtPlayerPosition: 1
     hasAnimation: 0
-    hasParticalEffect: 0
+    hasParticleEffect: 0
     effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
   - seedItemID: 1011
     growthDays: 0100000002000000020000000300000003000000
     growthPrefabs:
@@ -95,8 +97,9 @@ MonoBehaviour:
     regrowTimes: 0
     generateAtPlayerPosition: 0
     hasAnimation: 1
-    hasParticalEffect: 1
+    hasParticleEffect: 1
     effectType: 1
+    effectPos: {x: 0, y: 2.5, z: 0}
   - seedItemID: 1013
     growthDays: 00000000
     growthPrefabs:
@@ -115,5 +118,6 @@ MonoBehaviour:
     regrowTimes: 0
     generateAtPlayerPosition: 0
     hasAnimation: 0
-    hasParticalEffect: 0
+    hasParticleEffect: 0
     effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
