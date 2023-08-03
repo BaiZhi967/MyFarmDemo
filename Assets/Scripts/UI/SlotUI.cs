@@ -26,7 +26,7 @@ namespace WzFarm.Inventory
         public int itemAmount;
         public int slotIndex;
 
-        private InventoryUI _inventoryUI => GetComponentInParent<InventoryUI>();
+        public InventoryUI _inventoryUI => GetComponentInParent<InventoryUI>();
         private void Start()
         {
             isSelected = false;
