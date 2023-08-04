@@ -244,6 +244,7 @@ public class CursorManager : MonoBehaviour
                         SetCursorInValid();
                     }
                     break;
+                case ItemType.BreakTool:
                 case ItemType.ChopTool:
                     if (crop is not null)
                     {
@@ -255,6 +256,10 @@ public class CursorManager : MonoBehaviour
                         {
                             SetCursorInValid();
                         }
+                    }
+                    else
+                    {
+                        SetCursorInValid();
                     }
                     break;
                 

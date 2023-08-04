@@ -50,6 +50,7 @@ public class AnimationOverride : MonoBehaviour
             ItemType.WaterTool => PartType.Water,
             ItemType.CollectTool => PartType.Collect,
             ItemType.ChopTool => PartType.Chop,
+            ItemType.BreakTool => PartType.Break,
             _ => PartType.None
         };
         holdItem.enabled = false;

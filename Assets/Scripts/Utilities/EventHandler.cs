@@ -125,4 +125,10 @@ public static class EventHandler
     {
         ParticleEffectEvent?.Invoke(effectType,pos);
     }
+
+    public static event Action GenerateCropEvent;
+    public static void CallGenerateCropEvent()
+    {
+        GenerateCropEvent?.Invoke();
+    }
 }

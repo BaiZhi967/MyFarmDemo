@@ -23,6 +23,8 @@ namespace WzFarm.Map
 
         //场景名字+坐标和对应的瓦片信息
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
+        //记录场景是否第一次被加载
+        private Dictionary<string, bool> firstLoadDict = new Dictionary<string, bool>();
 
         private Grid currentGrid;
         private Season currentSeason;
@@ -31,6 +33,7 @@ namespace WzFarm.Map
         {
             foreach (var mapData in mapDataList)
             {
+                firstLoadDict.Add(mapData.sceneName,true);
                 InitTileDetailsDict(mapData);
             }
         }
@@ -61,6 +64,13 @@ namespace WzFarm.Map
             waterTilemap =GameObject.FindWithTag("Water").GetComponent<Tilemap>();
             
             //DisplayMap(SceneManager.GetActiveScene().name);
+
+            if (firstLoadDict[SceneManager.GetActiveScene().name])
+            {
+                //预先生成农作物
+                EventHandler.CallGenerateCropEvent();
+                firstLoadDict[SceneManager.GetActiveScene().name] = false;
+            }
             RefreshMap();
         }
 
@@ -164,12 +174,11 @@ namespace WzFarm.Map
                         //音效
                         break;
                     case ItemType.CollectTool:
-                        currentCrop =  GetCropObject(mouseWorldPos);
-                        currentCrop.ProcessToolAction(itemDetails,currentTile);
+                        currentCrop?.ProcessToolAction(itemDetails,currentTile);
                         break;
+                    case ItemType.BreakTool:
                     case ItemType.ChopTool:
-                        currentCrop =  GetCropObject(mouseWorldPos);
-                        currentCrop.ProcessToolAction(itemDetails,currentCrop._tileDetails);
+                        currentCrop?.ProcessToolAction(itemDetails,currentCrop._tileDetails);
                         break;
                         
                 }
@@ -263,12 +272,16 @@ namespace WzFarm.Map
         /// 更新瓦片信息
         /// </summary>
         /// <param name="tileDetails"></param>
-        private void UpdateTileDetails(TileDetails tileDetails)
+        public void UpdateTileDetails(TileDetails tileDetails)
         {
             string key = tileDetails.girdX + "x" + tileDetails.gridY + "y" + SceneManager.GetActiveScene().name;
             if (tileDetailsDict.ContainsKey(key))
             {
                 tileDetailsDict[key] = tileDetails;
+            }
+            else
+            {
+                tileDetailsDict.Add(key,tileDetails);
             }
         }
         /// <summary>

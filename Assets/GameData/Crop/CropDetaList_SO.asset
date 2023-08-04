@@ -121,3 +121,24 @@ MonoBehaviour:
     hasParticleEffect: 0
     effectType: 0
     effectPos: {x: 0, y: 0, z: 0}
+  - seedItemID: 1014
+    growthDays: 00000000
+    growthPrefabs:
+    - {fileID: 315766567869700194, guid: c30d65a2ec52a9e479ffa559b8271839, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: b40fde803efab463bbc950e4d29ee5ce, type: 3}
+    seasons: 00000000010000000200000003000000
+    harvestToolItemID: f8030000
+    requireActionCount: 03000000
+    transferItemID: 0
+    producedItemID: f7030000
+    producedMinAmount: 05000000
+    producedMaxAmount: 08000000
+    spawnRadius: {x: 2, y: 1}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticleEffect: 0
+    effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
