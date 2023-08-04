@@ -139,6 +139,6 @@ MonoBehaviour:
     regrowTimes: 0
     generateAtPlayerPosition: 0
     hasAnimation: 0
-    hasParticleEffect: 0
-    effectType: 0
-    effectPos: {x: 0, y: 0, z: 0}
+    hasParticleEffect: 1
+    effectType: 3
+    effectPos: {x: 0, y: 0.6, z: 0}
