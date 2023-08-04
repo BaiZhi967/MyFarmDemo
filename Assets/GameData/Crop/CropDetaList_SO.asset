@@ -149,8 +149,8 @@ MonoBehaviour:
     growthSprites:
     - {fileID: 21300000, guid: 9ae5a331348064d73aa91a952b9e1a41, type: 3}
     seasons: 00000000010000000200000003000000
-    harvestToolItemID: f8030000
-    requireActionCount: 03000000
+    harvestToolItemID: fd030000
+    requireActionCount: 01000000
     transferItemID: 0
     producedItemID: 
     producedMinAmount: 
@@ -170,8 +170,8 @@ MonoBehaviour:
     growthSprites:
     - {fileID: 21300000, guid: e6647f7a307d24b65957f4ef34c39562, type: 3}
     seasons: 00000000010000000200000003000000
-    harvestToolItemID: f8030000
-    requireActionCount: 03000000
+    harvestToolItemID: fd030000
+    requireActionCount: 01000000
     transferItemID: 0
     producedItemID: 
     producedMinAmount: 
@@ -191,8 +191,8 @@ MonoBehaviour:
     growthSprites:
     - {fileID: 21300000, guid: 0c055f09a64a74805ad18c1f0b134fec, type: 3}
     seasons: 00000000010000000200000003000000
-    harvestToolItemID: f8030000
-    requireActionCount: 03000000
+    harvestToolItemID: fd030000
+    requireActionCount: 01000000
     transferItemID: 0
     producedItemID: fc030000
     producedMinAmount: 02000000

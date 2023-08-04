@@ -33,16 +33,16 @@ MonoBehaviour:
     itemAmount: 20
   - itemID: 1012
     itemAmount: 8
+  - itemID: 1015
+    itemAmount: 41
   - itemID: 0
     itemAmount: 0
   - itemID: 0
     itemAmount: 0
   - itemID: 0
     itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1021
+    itemAmount: 1
   - itemID: 0
     itemAmount: 0
   - itemID: 0

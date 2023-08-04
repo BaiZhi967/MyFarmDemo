@@ -92,6 +92,9 @@ public class Crop : MonoBehaviour
         EventHandler.CallRefreshCurrentMap();
     }
 
+    /// <summary>
+    /// 生成果实
+    /// </summary>
     public void SpwanHarvestItems()
     {
         int amountToProduce = 0;

@@ -1392,7 +1392,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0, y: 0.16346207}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1403,7 +1403,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.5, y: 0.22692412}
   m_EdgeRadius: 0
 --- !u!210 &1907013138
 SortingGroup:
@@ -1520,6 +1520,18 @@ MonoBehaviour:
   - partType: 3
     partName: 3
     overrideController: {fileID: 22100000, guid: 15905dbb27712274788a46285c8bdb83, type: 2}
+  - partType: 7
+    partName: 3
+    overrideController: {fileID: 22100000, guid: dcbf0c451dc0688449552f86ec7ed2ee, type: 2}
+  - partType: 7
+    partName: 2
+    overrideController: {fileID: 22100000, guid: cff67cddfff959149ae94cc9a9eae426, type: 2}
+  - partType: 7
+    partName: 1
+    overrideController: {fileID: 22100000, guid: 8e852e041c497ee4794844c35cf5758e, type: 2}
+  - partType: 7
+    partName: 0
+    overrideController: {fileID: 22100000, guid: 7a1beb092feefaa438c67c52bedb7e5b, type: 2}
 --- !u!1 &1954484646
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WzFarm.CropPlant;
 
 namespace WzFarm.Inventory
 {
@@ -40,6 +41,14 @@ namespace WzFarm.Inventory
                 Vector2 newSize = new Vector2(_spriteRenderer.sprite.bounds.size.x, _spriteRenderer.sprite.bounds.size.y);
                 _collider2D.size = newSize;
                 _collider2D.offset = new Vector2(0, _spriteRenderer.sprite.bounds.center.y);
+            }
+
+            if (_itemDetails.itemType == ItemType.ReapableScenery)
+            {
+                var reapItem = gameObject.AddComponent<ReapItem>();
+                gameObject.AddComponent<ItemInteractive>();
+                reapItem.InitCropDetails(_itemDetails.itemID);
+                
             }
         }
     }

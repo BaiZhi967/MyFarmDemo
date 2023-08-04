@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using WzFarm.CropPlant;
 
 namespace WzFarm.Map
 {
@@ -28,6 +29,8 @@ namespace WzFarm.Map
 
         private Grid currentGrid;
         private Season currentSeason;
+
+        private List<ReapItem> itemInRadius;
 
         private void Start()
         {
@@ -180,6 +183,14 @@ namespace WzFarm.Map
                     case ItemType.ChopTool:
                         currentCrop?.ProcessToolAction(itemDetails,currentCrop._tileDetails);
                         break;
+                    case ItemType.ReapTool:
+                        for (int i = 0; i < itemInRadius.Count; i++)
+                        {
+                            EventHandler.CallParticleEffectEvent(ParticleEffectType.ReapableScenery,itemInRadius[i].transform.position+Vector3.up);
+                            itemInRadius[i].SpwanHarvestItems();
+                            Destroy(itemInRadius[i].gameObject );
+                        }
+                        break;
                         
                 }
 
@@ -205,6 +216,36 @@ namespace WzFarm.Map
                     currentCrop = colliders[i].GetComponent<Crop>();
             }
             return currentCrop;
+        }
+
+        /// <summary>
+        /// 返回工具范围内的杂草
+        /// </summary>
+        /// <param name="itemDetails">工具信息</param>
+        /// <returns></returns>
+        public bool HavaReapableItemInRadius(Vector3 mouseWorldPos,ItemDetails itemDetails)
+        {
+            itemInRadius = new List<ReapItem>();
+            Collider2D[] collider2Ds = new Collider2D[20];
+
+            Physics2D.OverlapCircleNonAlloc(mouseWorldPos, itemDetails.itemUseRadius, collider2Ds);
+            if (collider2Ds.Length > 0)
+            {
+                for (int i = 0; i < collider2Ds.Length; i++)
+                {
+                    if (collider2Ds[i] is not null)
+                    {
+                        if (collider2Ds[i].GetComponent<ReapItem>() is not null)
+                        {
+                            itemInRadius.Add(collider2Ds[i].GetComponent<ReapItem>());
+                        }
+                    }
+                    
+                }
+            }
+
+            return itemInRadius.Count > 0;
+
         }
         
         
