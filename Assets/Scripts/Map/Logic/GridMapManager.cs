@@ -368,5 +368,33 @@ namespace WzFarm.Map
                 }
             }
         }
+        
+        /// <summary>
+        /// 根据场景名称构建网格范围，绘制范围和原点
+        /// </summary>
+        /// <param name="sceneName">场景名称</param>
+        /// <param name="gridDimensions">网格范围</param>
+        /// <param name="gridOrigin">网格原点</param>
+        /// <returns>是否有当前场景的信息</returns>
+        public bool GetGridDimensions(string sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin){
+            gridDimensions = Vector2Int.zero;
+            gridOrigin = Vector2Int.zero;
+
+            foreach (var mapDataSo in mapDataList)
+            {
+                if (mapDataSo.sceneName==sceneName)
+                {
+                    gridDimensions.x = mapDataSo.gridWidth;
+                    gridDimensions.y = mapDataSo.gridHeight;
+
+                    gridOrigin.x = mapDataSo.originX;
+                    gridOrigin.y = mapDataSo.originY;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
