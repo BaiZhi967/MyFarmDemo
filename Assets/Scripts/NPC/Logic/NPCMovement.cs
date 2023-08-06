@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using WzFarm.AStar;
@@ -8,6 +9,10 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Animator))]
 public class NPCMovement : MonoBehaviour
 {
+    public ScheduleDataList_SO scheduleData;
+    private SortedSet<ScheduleDetails> scheduleSet;
+
+    private ScheduleDetails currentSchedule;
     //临时存储信息
     [SerializeField] private string currentScene;
     private string targetScene;
@@ -28,8 +33,12 @@ public class NPCMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D coll;
     private Animator anim;
+    private Grid _grid;
 
     private Stack<MovementStep> movementSteps;
+
+    private bool isInitialised;
+    private TimeSpan GameTime => TimeManager.Instance.GameTime;
 
     private void Awake()
     {
@@ -51,7 +60,13 @@ public class NPCMovement : MonoBehaviour
 
     private void OnAfterSceneLoadedEvent()
     {
+        _grid = FindObjectOfType<Grid>();
         CheckVisiable();
+        if (!isInitialised)
+        {
+            InitNPC();
+            isInitialised = true;
+        }
     }
 
     private void CheckVisiable()
@@ -62,6 +77,71 @@ public class NPCMovement : MonoBehaviour
             SetInactiveInScene();
     }
 
+    private void InitNPC()
+    {
+        targetScene = currentScene;
+        
+        //保持在当前坐标的网格中心点
+        currentGridPosition = _grid.WorldToCell(transform.position);
+        transform.position = new Vector3(currentGridPosition.x + Settings.gridCellSize / 2f,
+            currentGridPosition.y + Settings.gridCellSize / 2f, 0);
+
+        tragetGridPosition = currentGridPosition;
+    }
+
+
+    public void BuildPath(ScheduleDetails schedule)
+    {
+        movementSteps.Clear();
+        currentSchedule = schedule;
+
+        if (schedule.targetScene == currentScene)
+        {
+            AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)currentGridPosition,schedule.targetGridPosition,movementSteps);
+        }
+    }
+
+    private void UpdateTimeOnPath()
+    {
+        MovementStep preiousStep = null;
+
+        TimeSpan currentGameTime = GameTime;
+
+        foreach (var step in movementSteps)
+        {
+            if (preiousStep is null)
+            {
+                preiousStep = step;
+            }
+
+            step.hour = currentGameTime.Hours;
+            step.minute = currentGameTime.Minutes;
+            step.second = currentGameTime.Seconds;
+
+            TimeSpan gridMovementStepTime;
+            if (MoveInDiagonal(step, preiousStep))
+                gridMovementStepTime = new TimeSpan(0, 0, (int)(Settings.gridCellDiagonalSize / normalSpeed / Settings.secondThreshold));
+            else
+                gridMovementStepTime = new TimeSpan(0, 0, (int)(Settings.gridCellSize / normalSpeed / Settings.secondThreshold));
+            //累加获得下一步的时间戳
+            currentGameTime = currentGameTime.Add(gridMovementStepTime);
+            //循环下一步
+            preiousStep = step;
+        }
+    }
+    
+    /// <summary>
+    /// 判断是否走斜方向
+    /// </summary>
+    /// <param name="currentStep"></param>
+    /// <param name="previousStep"></param>
+    /// <returns></returns>
+    private bool MoveInDiagonal(MovementStep currentStep, MovementStep previousStep)
+    {
+        return (currentStep.gridCoordinate.x != previousStep.gridCoordinate.x) && (currentStep.gridCoordinate.y != previousStep.gridCoordinate.y);
+    }
+    
+    
 
     #region 设置NPC显示情况
     private void SetActiveInScene()

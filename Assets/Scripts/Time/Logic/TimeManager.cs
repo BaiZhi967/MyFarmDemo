@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : Singleton<TimeManager>
 {
     private int gameSecond, gameMinute, gameHour, gameDay, gameMonth, gameYear;
     private Season gameSeason = Season.春;
     private int monthInSeason = 3;
     public bool gameClockPause;
     private float tikTime;
+    public TimeSpan GameTime => new TimeSpan(gameHour,gameMinute,gameSecond);
 
-    private void Awake()
+    protected override void Awake()
     {
-        
+        base.Awake();
         NewGameTime();
     }
 

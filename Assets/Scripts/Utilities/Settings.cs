@@ -1,3 +1,4 @@
+
 public class Settings
 {
     public const float itemFadeDuration = 0.35f;
@@ -14,5 +15,10 @@ public class Settings
     
     //Transition
     public const float fadeDuration = 1.5f;
+    
+    
+    //NPC网格偏移
+    public const float gridCellSize = 1;
+    public const float gridCellDiagonalSize = 1.41f;
 
 }

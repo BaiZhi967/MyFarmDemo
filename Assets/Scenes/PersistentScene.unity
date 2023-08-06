@@ -1778,6 +1778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519a7349818ea844d83a4d567c694f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scheduleData: {fileID: 11400000, guid: 69a39669c30664647aa4f611ad4f8b03, type: 2}
   currentScene: 01.Field
   normalSpeed: 2
   isMoving: 0
