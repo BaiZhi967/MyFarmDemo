@@ -362,10 +362,11 @@ MonoBehaviour:
   displayTile: {fileID: 11400000, guid: caeddba0d67a4974da60dd06a9c61b82, type: 2}
   displayStartAndFinish: 1
   displayPath: 1
+  npcMovement: {fileID: 1915524365}
   moveNPC: 0
-  targetScene: PersistentScene
-  targetPos: {x: 0, y: 0}
-  stopClip: {fileID: 0}
+  targetScene: 01.Field
+  targetPos: {x: 21, y: -8}
+  stopClip: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
 --- !u!114 &210785334
 MonoBehaviour:
   m_ObjectHideFlags: 0

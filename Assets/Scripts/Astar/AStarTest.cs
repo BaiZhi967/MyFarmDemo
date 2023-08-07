@@ -21,7 +21,7 @@ namespace WzFarm.AStar
 
 
         [Header("测试移动NPC")]
-        //public NPCMovement npcMovement;
+        public NPCMovement npcMovement;
         public bool moveNPC;
         [SceneName] public string targetScene;
         public Vector2Int targetPos;
@@ -38,12 +38,12 @@ namespace WzFarm.AStar
         {
             ShowPathOnGridMap();
 
-            // if (moveNPC)
-            // {
-            //     moveNPC = false;
-            //     var schedule = new ScheduleDetails(0, 0, 0, 0, Season.春, targetScene, targetPos, stopClip, true);
-            //     npcMovement.BuildPath(schedule);
-            // }
+            if (moveNPC)
+            {
+                moveNPC = false;
+                var schedule = new ScheduleDetails(0, 0, 0, 0, Season.春, targetScene, targetPos, stopClip, true);
+                npcMovement.BuildPath(schedule);
+            }
         }
 
         private void ShowPathOnGridMap()

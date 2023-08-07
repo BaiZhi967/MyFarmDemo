@@ -20,5 +20,6 @@ public class Settings
     //NPC网格偏移
     public const float gridCellSize = 1;
     public const float gridCellDiagonalSize = 1.41f;
+    public const float pixelSize = 0.05f;
 
 }
