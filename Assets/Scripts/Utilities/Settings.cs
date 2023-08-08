@@ -21,5 +21,7 @@ public class Settings
     public const float gridCellSize = 1;
     public const float gridCellDiagonalSize = 1.41f;
     public const float pixelSize = 0.05f;
+    
+    public const float animationBreakTime = 5f;
 
 }
