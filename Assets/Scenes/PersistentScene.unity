@@ -1783,6 +1783,7 @@ MonoBehaviour:
   currentScene: 01.Field
   normalSpeed: 2
   isMoving: 0
+  blankAnimationClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
 --- !u!95 &1915524366
 Animator:
   serializedVersion: 5

@@ -24,9 +24,9 @@ public class NPCMovement : MonoBehaviour
     public string StartScene { set => currentScene = value; }
 
     [Header("移动属性")]
-    public float normalSpeed = 2f;
-    private float minSpeed = 1;
-    private float maxSpeed = 3;
+    public float normalSpeed = 0.2f;
+    private float minSpeed = 0.1f;
+    private float maxSpeed = 0.3f;
     private Vector2 dir;
     public bool isMoving;
 
@@ -48,6 +48,8 @@ public class NPCMovement : MonoBehaviour
     private float animationBreakTime;
     private bool canPlayStopAnimation;
     private AnimationClip  stopAnimationClip;
+    public AnimationClip blankAnimationClip;
+    private AnimatorOverrideController _animatorOverrideController;
     private TimeSpan GameTime => TimeManager.Instance.GameTime;
 
     private void Awake()
@@ -57,18 +59,32 @@ public class NPCMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         movementSteps = new Stack<MovementStep>();
+
+        _animatorOverrideController = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        anim.runtimeAnimatorController = _animatorOverrideController;
+        scheduleSet = new SortedSet<ScheduleDetails>();
+        foreach (var schedule in scheduleData.scheduleList)
+        {
+            scheduleSet.Add(schedule);
+        }
     }
 
     private void OnEnable()
     {
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+
+        EventHandler.GameMinuteEvent += OnGameMinuteEvent;
     }
+
+    
 
     private void OnDisable()
     {
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
+        
     }
 
     private void OnBeforeSceneUnloadEvent()
@@ -106,6 +122,36 @@ public class NPCMovement : MonoBehaviour
         }
 
         sceneLoaded = true;
+    }
+    
+    private void OnGameMinuteEvent(int min, int hour,int day,Season season)
+    {
+        int time = hour * 100 + min;
+        ScheduleDetails mathSchedule = null;
+        foreach (var val in scheduleSet)
+        {
+            if (val.Time == time)
+            {
+                if (val.day != 0 &&val.day != day )
+                {
+                    continue;
+                }
+                if (val.season != season)
+                {
+                    continue;
+                }
+                mathSchedule = val;
+            }
+            else if(val.Time>time)
+            {
+                break;
+            }
+        }
+
+        if (mathSchedule is not null)
+        {
+            BuildPath(mathSchedule);
+        }
     }
 
     private void CheckVisiable()
@@ -262,12 +308,36 @@ public class NPCMovement : MonoBehaviour
         animationBreakTime = Settings.animationBreakTime;
         if (stopAnimationClip is not null)
         {
+            _animatorOverrideController[blankAnimationClip] = stopAnimationClip;
             anim.SetBool("EventAnimation",true);
             yield return null;
             anim.SetBool("EventAnimation",false);
         }
+        else
+        {
+            _animatorOverrideController[blankAnimationClip] = blankAnimationClip;
+            anim.SetBool("EventAnimation",false);
+        }
 
     }
+    
+    private void SwitchAnimation()
+    {
+        isMoving = transform.position != GetWorldPostion(tragetGridPosition);
+        anim.SetBool("isMoving",isMoving);
+        if (isMoving)
+        {
+            
+            anim.SetBool("Exit",true);
+            anim.SetFloat("DirX",dir.x);
+            anim.SetFloat("DirY",dir.y);
+        }
+        else
+        {
+            anim.SetBool("Exit",false);
+        }
+        
+    } 
 
     #region 设置NPC显示情况
     private void SetActiveInScene()
@@ -286,22 +356,7 @@ public class NPCMovement : MonoBehaviour
         // transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    private void SwitchAnimation()
-    {
-        isMoving = transform.position != GetWorldPostion(tragetGridPosition);
-        anim.SetBool("isMoving",isMoving);
-        if (isMoving)
-        {
-            anim.SetBool("Exit",true);
-            anim.SetFloat("DirX",dir.x);
-            anim.SetFloat("DirY",dir.y);
-        }
-        else
-        {
-            anim.SetBool("Exit",false);
-        }
-        
-    } 
+    
         
     #endregion
 }
