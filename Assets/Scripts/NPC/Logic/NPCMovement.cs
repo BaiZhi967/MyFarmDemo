@@ -250,6 +250,38 @@ public class NPCMovement : MonoBehaviour
         if (schedule.targetScene == currentScene)
         {
             AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)currentGridPosition,schedule.targetGridPosition,movementSteps);
+        }else if (schedule.targetScene != currentScene)
+        {
+            SceneRoute sceneRoute = NPCManager.Instance.GetSceneRoute(currentScene, schedule.targetScene);
+
+            if (sceneRoute != null)
+            {
+                for (int i = 0; i < sceneRoute.scenePathList.Count; i++)
+                {
+                    Vector2Int fromPos, gotoPos;
+                    ScenePath path = sceneRoute.scenePathList[i];
+
+                    if (path.fromGridCell.x >= Settings.maxGridSize)
+                    {
+                        fromPos = (Vector2Int)currentGridPosition;
+                    }
+                    else
+                    {
+                        fromPos = path.fromGridCell;
+                    }
+
+                    if (path.gotoGridCell.x >= Settings.maxGridSize)
+                    {
+                        gotoPos = schedule.targetGridPosition;
+                    }
+                    else
+                    {
+                        gotoPos = path.gotoGridCell;
+                    }
+
+                    AStar.Instance.BuildPath(path.sceneName, fromPos, gotoPos, movementSteps);
+                }
+            }
         }
     }
 

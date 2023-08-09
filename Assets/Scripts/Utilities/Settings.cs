@@ -23,5 +23,6 @@ public class Settings
     public const float pixelSize = 0.05f;
     
     public const float animationBreakTime = 5f;
+    public const int maxGridSize = 9999;
 
 }

@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 210785335}
   - component: {fileID: 210785334}
   - component: {fileID: 210785333}
+  - component: {fileID: 210785336}
   m_Layer: 0
   m_Name: NPCManager
   m_TagString: Untagged
@@ -360,8 +361,8 @@ MonoBehaviour:
   finishPos: {x: 30, y: 2}
   displayMap: {fileID: 1486941222}
   displayTile: {fileID: 11400000, guid: caeddba0d67a4974da60dd06a9c61b82, type: 2}
-  displayStartAndFinish: 1
-  displayPath: 1
+  displayStartAndFinish: 0
+  displayPath: 0
   npcMovement: {fileID: 1915524365}
   moveNPC: 0
   targetScene: 01.Field
@@ -394,6 +395,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210785336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210785332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d0059d964a6f94a9fbf6480ecc0049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneRouteDate: {fileID: 11400000, guid: 34eeb5e18d8a36d49b8729a8e5fd4171, type: 2}
+  npcPositionList:
+  - npc: {fileID: 1915524369}
+    startScene: 01.Field
+    position: {x: 11.5, y: 8.5, z: 0}
 --- !u!1 &273553413
 GameObject:
   m_ObjectHideFlags: 0

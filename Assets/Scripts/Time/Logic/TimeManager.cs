@@ -23,6 +23,19 @@ public class TimeManager : Singleton<TimeManager>
         EventHandler.CallGameMinuteEvent(gameMinute, gameHour,gameDay,gameSeason);
         EventHandler.CallGameDateEvent(gameHour,gameDay,gameMonth,gameYear,gameSeason);
     }
+    private void OnEnable()
+    {
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+    }
+
+
+
+    private void OnDisable()
+    {
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+    }
 
     private void Update()
     {
@@ -111,5 +124,15 @@ public class TimeManager : Singleton<TimeManager>
         gameYear = 2023;
         gameSeason = Season.春;
         
+    }
+    
+    private void OnAfterSceneLoadedEvent()
+    {
+        gameClockPause = false;
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        gameClockPause = true;
     }
 }

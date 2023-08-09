@@ -88,3 +88,29 @@ public class TileDetails
     public int daysSinceLastHarvest = -1;
     public int daysSinceWatered = -1;
 }
+
+[System.Serializable]
+public class NPCPosition
+{
+    public Transform npc;
+    public string startScene;
+    public Vector3 position;
+}
+
+
+[System.Serializable]
+public class SceneRoute
+{
+    public string fromSceneName;
+    public string gotoSceneName;
+    public List<ScenePath> scenePathList;
+}
+
+[System.Serializable]
+//场景路径
+public class ScenePath
+{
+    public string sceneName;
+    public Vector2Int fromGridCell;
+    public Vector2Int gotoGridCell;
+}
