@@ -921,6 +921,7 @@ MonoBehaviour:
   mapDataList:
   - {fileID: 11400000, guid: d09ce00a2ef9d96408653b498321111c, type: 2}
   - {fileID: 11400000, guid: 35858c44be2af3c498e93ccafadce112, type: 2}
+  - {fileID: 11400000, guid: 8d3a6adc31491124f8593c9267e2c799, type: 2}
 --- !u!4 &1075100798
 Transform:
   m_ObjectHideFlags: 0
