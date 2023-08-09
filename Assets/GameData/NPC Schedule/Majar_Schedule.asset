@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Majar_Schedule
   m_EditorClassIdentifier: 
   scheduleList:
-  - hour: 8
-    minute: 0
+  - hour: 6
+    minute: 40
     day: 0
     priority: 0
     season: 0
     targetScene: 01.Field
     targetGridPosition: {x: 8, y: 8}
     clipAtStop: {fileID: 7400000, guid: db32c3897ab64466f86a8993b8e48f9e, type: 2}
-    interactable: 0
+    interactable: 1

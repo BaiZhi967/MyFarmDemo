@@ -43,6 +43,7 @@ public class NPCMovement : MonoBehaviour
     private bool isInitialised;
     private bool NPCmove;
     private bool sceneLoaded;
+    public bool interactable;
     
     //动画计时器
     private float animationBreakTime;
@@ -244,7 +245,7 @@ public class NPCMovement : MonoBehaviour
     {
         movementSteps.Clear();
         currentSchedule = schedule;
-        
+        this.interactable = schedule.interactable;
         tragetGridPosition = (Vector3Int)schedule.targetGridPosition;
         stopAnimationClip = schedule.clipAtStop;
         if (schedule.targetScene == currentScene)
