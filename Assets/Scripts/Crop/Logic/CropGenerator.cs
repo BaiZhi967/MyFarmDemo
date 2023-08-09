@@ -37,6 +37,8 @@ namespace WzFarm.CropPlant
                 if (tile is null)
                 {
                     tile = new TileDetails();
+                    tile.girdX = cropGridPos.x;
+                    tile.gridY = cropGridPos.y;
                 }
 
                 tile.daysSinceWatered = -1;

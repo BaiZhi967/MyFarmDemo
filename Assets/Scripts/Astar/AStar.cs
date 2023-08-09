@@ -79,8 +79,8 @@ namespace WzFarm.AStar
                 for (int y = 0; y < gridHeight; y++)
                 {
                     Vector3Int tilePos = new Vector3Int(x + originX, y + originY, 0);
-
-                    TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(tilePos);    //偷懒
+                    var key = tilePos.x + "x" + tilePos.y + "y" + sceneName;
+                    TileDetails tile = GridMapManager.Instance.GetTileDetails(key);
 
                     if (tile != null)
                     {
