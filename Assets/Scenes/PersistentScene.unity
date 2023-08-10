@@ -1185,6 +1185,8 @@ GameObject:
   - component: {fileID: 1286689852}
   - component: {fileID: 1286689851}
   - component: {fileID: 1286689850}
+  - component: {fileID: 1286689853}
+  - component: {fileID: 1286689854}
   m_Layer: 0
   m_Name: NPC_Girl
   m_TagString: Untagged
@@ -1250,8 +1252,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2005776991
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 14502509, guid: 85f3f75b0912741b0bc48e7f38554cd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1293,7 +1295,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.040352345, y: 0.2721343}
+  m_Offset: {x: -0.014557362, y: 0.3690331}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -1304,7 +1306,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3197756, y: 0.5442686}
+  m_Size: {x: 1.5717115, y: 1.3840575}
   m_EdgeRadius: 0
 --- !u!114 &1286689851
 MonoBehaviour:
@@ -1322,7 +1324,7 @@ MonoBehaviour:
   currentScene: 03.Market
   normalSpeed: 2
   isMoving: 0
-  interactable: 0
+  interactable: 1
   blankAnimationClip: {fileID: 0}
 --- !u!50 &1286689852
 Rigidbody2D:
@@ -1345,6 +1347,53 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1286689853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286689846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc346917771e5848a3a97410e3ae33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnFinishEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1286689854}
+        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
+        m_MethodName: OpenShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dialogueList:
+  - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+    onLeft: 1
+    name: "\u91D1\u6BDB\u8D25\u72AC"
+    dialogueText: "\u6765\u4E70\u70B9\u4E1C\u897F\u5427"
+    hasToPause: 1
+    isDone: 0
+--- !u!114 &1286689854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286689846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d0720f54677684183ea465c2682e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopData: {fileID: 11400000, guid: 449ff80ff10e8ed4bb2bcd2524fed241, type: 2}
 --- !u!1 &1288551760
 GameObject:
   m_ObjectHideFlags: 0

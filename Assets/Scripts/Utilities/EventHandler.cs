@@ -139,4 +139,11 @@ public static class EventHandler
     {
         ShowDialogueEvent?.Invoke(dialoguePiece);
     }
+
+    public static event Action<SlotType, InventoryBag_SO> BaseBagOpenEvent;
+
+    public static void CallBaseBagOpenEvent(SlotType slotType, InventoryBag_SO inventoryBagSo)
+    {
+        BaseBagOpenEvent?.Invoke(slotType,inventoryBagSo);
+    }
 }

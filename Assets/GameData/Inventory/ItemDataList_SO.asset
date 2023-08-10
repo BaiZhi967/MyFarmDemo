@@ -47,8 +47,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1004
     itemName: "\u8461\u8404\u79CD\u5B50"
     itemType: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 150
+    sellPercentage: 0.5
   - itemID: 1005
     itemName: "\u841D\u535C"
     itemType: 1
@@ -143,8 +143,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 1
-    sellPercentage: 1
+    itemPrice: 50
+    sellPercentage: 0.3
   - itemID: 1012
     itemName: "\u6728\u5934"
     itemType: 1
