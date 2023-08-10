@@ -779,6 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573b48cba1beae4448ca899e494f67b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bluePrintData: {fileID: 11400000, guid: c94316a6049e86c47adf7d4a5f56f200, type: 2}
   _ItemDataListSo: {fileID: 11400000, guid: 54ed9fd6abb34b849a42b81a24427df1, type: 2}
   PlayerBag: {fileID: 11400000, guid: fa908012f2694e54e965c2c602166396, type: 2}
   playerMoney: 989419

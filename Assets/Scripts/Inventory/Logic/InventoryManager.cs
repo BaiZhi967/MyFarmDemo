@@ -7,7 +7,8 @@ namespace WzFarm.Inventory
 {
     public class InventoryManager : Singleton<InventoryManager>
     {
-        
+        [Header("建造蓝图")]
+        public BluePrintDataList_SO bluePrintData;
         [Header("物品数据")]
         public ItemDataList_SO _ItemDataListSo;
 

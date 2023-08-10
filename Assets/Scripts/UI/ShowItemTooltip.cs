@@ -26,6 +26,15 @@ namespace WzFarm.Inventory
 
                 _inventoryUI._itemTooltip.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0);
                 _inventoryUI._itemTooltip.transform.position = transform.position + Vector3.up * 60;
+                if (slotUI._ItemDetails.itemType == ItemType.Furniture)
+                {
+                    _inventoryUI._itemTooltip.resourcePanel.SetActive(true);
+                    _inventoryUI._itemTooltip.SetupResourcePanel(slotUI._ItemDetails.itemID);
+                }
+                else
+                {
+                    _inventoryUI._itemTooltip.resourcePanel.SetActive(false);
+                }
             }
             else
             {
