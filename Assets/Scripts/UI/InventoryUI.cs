@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ namespace WzFarm.Inventory
             EventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventHandler.BaseBagCloseEvent += OnBaseBagCloseEvent;
         }
 
         
@@ -34,8 +36,21 @@ namespace WzFarm.Inventory
             EventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventHandler.BaseBagCloseEvent -= OnBaseBagCloseEvent;
         }
-        
+
+        private void OnBaseBagCloseEvent(SlotType slotType, InventoryBag_SO bagSo)
+        {
+            baseBag.SetActive(false);
+            _itemTooltip.gameObject.SetActive(false);
+            UpdateSlotHightlight(-1);
+            foreach (var slot in baseBagSlots)
+            {
+                Destroy(slot.gameObject);
+            }
+            baseBagSlots.Clear();
+        }
+
         private void OnBaseBagOpenEvent(SlotType slotType, InventoryBag_SO bagSo)
         {
             GameObject prefab = slotType switch

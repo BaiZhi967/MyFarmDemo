@@ -146,4 +146,10 @@ public static class EventHandler
     {
         BaseBagOpenEvent?.Invoke(slotType,inventoryBagSo);
     }
+    public static event Action<SlotType, InventoryBag_SO> BaseBagCloseEvent;
+
+    public static void CallBaseBagCloseEvent(SlotType slotType, InventoryBag_SO inventoryBagSo)
+    {
+        BaseBagCloseEvent?.Invoke(slotType,inventoryBagSo);
+    }
 }
