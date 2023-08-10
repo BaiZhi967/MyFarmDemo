@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WzFarm.CropPlant;
+using WzFarm.Inventory;
 using WzFarm.Map;
 
 public class CursorManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class CursorManager : MonoBehaviour
     public Sprite normal, tool, seed,item;
     private Sprite currentSprite;
     private Image cursorImage;
+    private Image builderImage;
     private RectTransform cursorCanvas;
     //鼠标检测
     private Camera mainCamera;
@@ -55,6 +57,8 @@ public class CursorManager : MonoBehaviour
     {
         cursorCanvas = GameObject.FindGameObjectWithTag("Cursor").GetComponent<RectTransform>();
         cursorImage = cursorCanvas.GetChild(0).GetComponent<Image>();
+        builderImage = cursorCanvas.GetChild(1).GetComponent<Image>();
+        builderImage.gameObject.SetActive(false);
         currentSprite = normal;
         SetCursorImage(normal);
         
@@ -79,6 +83,7 @@ public class CursorManager : MonoBehaviour
         else
         {
             SetCursorImage(normal);
+            builderImage.gameObject.SetActive(false);
         }
     }
 
@@ -109,6 +114,7 @@ public class CursorManager : MonoBehaviour
     {
         cursorPositionValid = true;
         cursorImage.color = new Color(1, 1, 1, 1);
+        builderImage.color = new Color(1, 1, 1, 0.5f);
     }
     
     /// <summary>
@@ -118,6 +124,7 @@ public class CursorManager : MonoBehaviour
     {
         cursorPositionValid = false;
         cursorImage.color = new Color(1, 0, 0, 0.5f);
+        builderImage.color = new Color(1, 0, 0, 0.5f);
         //Debug.Log("Now Red");
     }
     
@@ -132,6 +139,7 @@ public class CursorManager : MonoBehaviour
             currentItem = null;
             cursorEnable = false;
             currentSprite = normal;
+            builderImage.gameObject.SetActive(false);
         }
         else
         {
@@ -153,6 +161,11 @@ public class CursorManager : MonoBehaviour
                 _ => normal,
             };
             cursorEnable = true;
+            if (itemDetails.itemType == ItemType.Furniture)
+            {
+                builderImage.gameObject.SetActive(true);
+                builderImage.sprite = itemDetails.itemOnWorldSprite;
+            }
         }
     }
 
@@ -162,6 +175,8 @@ public class CursorManager : MonoBehaviour
         mouseGirdPos = currentGrid.WorldToCell(mouseWorldPos);
 
         var playerGridPos = currentGrid.WorldToCell(PlayerTransform.position);
+
+        builderImage.rectTransform.position = Input.mousePosition;
         
         //判断在使用范围内
 
@@ -264,6 +279,16 @@ public class CursorManager : MonoBehaviour
                     break;
                 case ItemType.ReapTool:
                     if (GridMapManager.Instance.HavaReapableItemInRadius(mouseWorldPos,currentItem)){
+                        SetCursorValid();
+                    }
+                    else
+                    {
+                        SetCursorInValid();
+                    }
+                    break;
+                case ItemType.Furniture:
+                    if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID))
+                    {
                         SetCursorValid();
                     }
                     else

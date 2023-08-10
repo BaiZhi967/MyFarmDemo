@@ -20,6 +20,8 @@ public class ItemManager : MonoBehaviour
         EventHandler.DropItemEvent += OnDropItemEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+        //建造
+        EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
     }
 
     
@@ -30,6 +32,14 @@ public class ItemManager : MonoBehaviour
         EventHandler.DropItemEvent -= OnDropItemEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+        EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+    }
+
+    private void OnBuildFurnitureEvent(int ID, Vector3 mousePos)
+    {
+        BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(ID);
+        var buildItem = Instantiate(bluePrint.buildPrefab, mousePos, Quaternion.identity, itemParent);
+        
     }
 
     private void OnBeforeSceneUnloadEvent()

@@ -26,6 +26,8 @@ namespace WzFarm.Inventory
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
+            //建造
+            EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
         }
 
     
@@ -34,6 +36,17 @@ namespace WzFarm.Inventory
         {
             EventHandler.DropItemEvent -= OnDropItemEvent;
             EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+            EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+        }
+
+        private void OnBuildFurnitureEvent(int ID, Vector3 mousePos)
+        {
+            RemoveItem(ID, 1);
+            BluePrintDetails bluePrint = bluePrintData.GetBluePrintDetails(ID);
+            foreach (var item in bluePrint.resourceItem)
+            {
+                RemoveItem(item.itemID, item.itemAmount);
+            }
         }
 
         private void OnHarvestAtPlayerPosition(int itemID)
@@ -227,6 +240,27 @@ namespace WzFarm.Inventory
             }
             //刷新UI
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
+        }
+        
+        /// <summary>
+        /// 检查建造资源物品库存
+        /// </summary>
+        /// <param name="ID">图纸ID</param>
+        /// <returns></returns>
+        public bool CheckStock(int ID)
+        {
+            var bluePrintDetails = bluePrintData.GetBluePrintDetails(ID);
+
+            foreach (var resourceItem in bluePrintDetails.resourceItem)
+            {
+                var itemStock = PlayerBag.GetInventoryItem(resourceItem.itemID);
+                if (itemStock.itemAmount >= resourceItem.itemAmount)
+                {
+                    continue;
+                }
+                else return false;
+            }
+            return true;
         }
         
     }

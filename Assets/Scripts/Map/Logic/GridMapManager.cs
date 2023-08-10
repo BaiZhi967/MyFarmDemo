@@ -191,6 +191,9 @@ namespace WzFarm.Map
                             Destroy(itemInRadius[i].gameObject );
                         }
                         break;
+                    case ItemType.Furniture:
+                        EventHandler.CallBuildFurnitureEvent(itemDetails.itemID,mouseWorldPos);
+                        break;
                         
                 }
 
