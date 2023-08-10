@@ -11,7 +11,7 @@ namespace WzFarm.Inventory
     {
         public Image itemIcon;
         public TextMeshProUGUI itemName;
-        public TextMeshProUGUI tradeAmount;
+        public InputField tradeAmount;
         public Button submitButton;
         public Button cancelButton;
 
@@ -40,9 +40,12 @@ namespace WzFarm.Inventory
 
         private void TradeItem()
         {
-            var amount = Convert.ToInt32(tradeAmount.text);
 
-            //InventoryManager.Instance.TradeItem(item, amount, isSellTrade);
+            string amount = tradeAmount.text;
+            int cnt = 0;
+            Int32.TryParse(amount,out cnt);
+            //Debug.Log(amount+":"+cnt);
+            InventoryManager.Instance.TradeItem(item, cnt, isSellTrade);
 
             CancelTrade();
         }

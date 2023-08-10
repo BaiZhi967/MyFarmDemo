@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace WzFarm.Inventory
         [Header("通用背包")] [SerializeField] private GameObject baseBag;
         public GameObject slotShopPrefab;
         [Header("交易UI")] public TradeUI tradeUI;
+        public TextMeshProUGUI playerMoneyText;
         
         [SerializeField] private SlotUI[] playerSlots;
         [SerializeField] private List<SlotUI> baseBagSlots;
@@ -144,6 +146,7 @@ namespace WzFarm.Inventory
                     }
                     break;
             }
+            playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
         }
 
         private void Start()
@@ -153,6 +156,7 @@ namespace WzFarm.Inventory
                 playerSlots[i].slotIndex = i;
             }
             bagOpenned = bagUI.activeInHierarchy;
+            playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
         }
         private void Update()
         {

@@ -13,6 +13,8 @@ namespace WzFarm.Inventory
 
         [Header("背包数据")] public InventoryBag_SO PlayerBag;
 
+        public int playerMoney;
+
         private void Start()
         {
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,PlayerBag.itemList);
@@ -192,6 +194,39 @@ namespace WzFarm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
         }
 
+        /// <summary>
+        /// 交易物品
+        /// </summary>
+        /// <param name="itemDetails">物品信息</param>
+        /// <param name="amount">交易数量</param>
+        /// <param name="isSellTrade">是否卖东西</param>
+        public void TradeItem(ItemDetails itemDetails, int amount, bool isSellTrade)
+        {
+            int cost = itemDetails.itemPrice * amount;
+            //获得物品背包位置
+            int index = GetItemIndexInBag(itemDetails.itemID);
+
+            if (isSellTrade)    //卖
+            {
+                if (PlayerBag.itemList[index].itemAmount >= amount)
+                {
+                    RemoveItem(itemDetails.itemID, amount);
+                    //卖出总价
+                    cost = (int)(cost * itemDetails.sellPercentage);
+                    playerMoney += cost;
+                }
+            }
+            else if (playerMoney - cost >= 0)   //买
+            {
+                if (CheckBagCapacity())
+                {
+                    AddItemAtIndex(itemDetails.itemID, index, amount);
+                }
+                playerMoney -= cost;
+            }
+            //刷新UI
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.itemList);
+        }
         
     }
     
