@@ -16,7 +16,7 @@ namespace WzFarm.Inventory
         private bool bagOpenned;
         [Header("通用背包")] [SerializeField] private GameObject baseBag;
         public GameObject slotShopPrefab;
-        
+        [Header("交易UI")] public TradeUI tradeUI;
         
         [SerializeField] private SlotUI[] playerSlots;
         [SerializeField] private List<SlotUI> baseBagSlots;
@@ -27,6 +27,7 @@ namespace WzFarm.Inventory
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
             EventHandler.BaseBagCloseEvent += OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUI += OnShowTradeUI;
         }
 
         
@@ -37,6 +38,13 @@ namespace WzFarm.Inventory
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
             EventHandler.BaseBagCloseEvent -= OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUI -= OnShowTradeUI;
+        }
+
+        private void OnShowTradeUI(ItemDetails item, bool isSell)
+        {
+            tradeUI.gameObject.SetActive(true);
+            tradeUI.SetupTradeUI(item,isSell);
         }
 
         private void OnBaseBagCloseEvent(SlotType slotType, InventoryBag_SO bagSo)
@@ -47,6 +55,12 @@ namespace WzFarm.Inventory
             foreach (var slot in baseBagSlots)
             {
                 Destroy(slot.gameObject);
+            }
+            if (slotType == SlotType.Shop)
+            {
+                bagUI.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+                bagUI.SetActive(false);
+                bagOpenned = false;
             }
             baseBagSlots.Clear();
         }
@@ -69,6 +83,14 @@ namespace WzFarm.Inventory
                 baseBagSlots.Add(slot);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
+
+            if (slotType == SlotType.Shop)
+            {
+                bagUI.GetComponent<RectTransform>().pivot = new Vector2(-1, 0.5f);
+                bagUI.SetActive(true);
+                bagOpenned = true;
+            }
+            
             OnUpdateInventoryUI(InventoryLocation.Box,bagSo.itemList);
         }
 

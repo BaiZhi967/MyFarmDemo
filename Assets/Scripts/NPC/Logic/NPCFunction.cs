@@ -20,11 +20,13 @@ public class NPCFunction : MonoBehaviour
     {
         isOpen = true;
         EventHandler.CallBaseBagOpenEvent(SlotType.Shop,shopData);
+        EventHandler.CallUpdateGameStateEvent(GameState.Pause);
     }
 
     public void CloseShop()
     {
         isOpen = false;
         EventHandler.CallBaseBagCloseEvent(SlotType.Shop,shopData);
+        EventHandler.CallUpdateGameStateEvent(GameState.Gameplay);
     }
 }

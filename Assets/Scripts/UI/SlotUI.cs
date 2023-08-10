@@ -128,6 +128,15 @@ namespace WzFarm.Inventory
                     InventoryManager.Instance.SwapItem(this.slotIndex,targetIndex);
                     targetSlot.isSelected = true;
                     _inventoryUI.UpdateSlotHightlight(targetIndex);
+                }else if (slotType == SlotType.Shop && targetSlot.slotType == SlotType.Bag)
+                {
+                    //买东西
+                    EventHandler.CallShowTradeUI(_ItemDetails, false);
+
+                }else if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Shop)
+                {
+                    //卖东西
+                    EventHandler.CallShowTradeUI(_ItemDetails, true);
                 }
 
 
@@ -142,7 +151,6 @@ namespace WzFarm.Inventory
                     //this.itemAmount--;
                     //InventoryManager.Instance.PlayerBag.itemList[slotIndex].itemAmount--;
                     //UpdateSlot(_ItemDetails,this.itemAmount);
-                    //TODO:从玩家背包减少该物品数量
                 }
             }
             

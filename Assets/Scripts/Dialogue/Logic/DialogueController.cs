@@ -57,16 +57,22 @@ namespace WzFarm.Dialogue
             {
                 //传到UI显示对话
                 EventHandler.CallShowDialogueEvent(result);
+                EventHandler.CallUpdateGameStateEvent(GameState.Pause);
                 yield return new WaitUntil(() => result.isDone);
                 isTalking = false;
             }
             else
             {
+                EventHandler.CallUpdateGameStateEvent(GameState.Gameplay);
                 EventHandler.CallShowDialogueEvent(null);
                 FillDialogueStack();
                 isTalking = false;
 
-                OnFinishEvent?.Invoke();
+                if (OnFinishEvent is not null)
+                {
+                    OnFinishEvent?.Invoke();
+                    canTalk = false;
+                }
             }
         }
         

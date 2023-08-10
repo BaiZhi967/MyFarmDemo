@@ -9,15 +9,30 @@ namespace WzFarm.Inventory
     {
         public KeyCode key;
         private SlotUI slotUI;
+        private bool canUse = true;
 
         private void Awake()
         {
             slotUI = GetComponent<SlotUI>();
         }
+        private void OnEnable()
+        {
+            EventHandler.UpdateGameStateEvent += OnUpdateGameStateEvent;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+        }
+
+        private void OnUpdateGameStateEvent(GameState gameState)
+        {
+            canUse = gameState == GameState.Gameplay;
+        }
 
         private void Update()
         {
-            if (Input.GetKeyDown(key))
+            if (Input.GetKeyDown(key)&&canUse)
             {
                 if (slotUI._ItemDetails != null)
                 {

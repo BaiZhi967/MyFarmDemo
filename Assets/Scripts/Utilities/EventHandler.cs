@@ -152,4 +152,16 @@ public static class EventHandler
     {
         BaseBagCloseEvent?.Invoke(slotType,inventoryBagSo);
     }
+    
+    public static event Action<GameState> UpdateGameStateEvent;
+    public static void CallUpdateGameStateEvent(GameState gameState)
+    {
+        UpdateGameStateEvent?.Invoke(gameState);
+    }
+    
+    public static event Action<ItemDetails, bool> ShowTradeUI;
+    public static void CallShowTradeUI(ItemDetails item, bool isSell)
+    {
+        ShowTradeUI?.Invoke(item, isSell);
+    }
 }
