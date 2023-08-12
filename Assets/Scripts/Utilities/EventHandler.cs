@@ -171,4 +171,10 @@ public static class EventHandler
     {
         BuildFurnitureEvent?.Invoke(ID, pos);
     }
+    //灯光
+    public static event Action<Season, LightShift, float> LightShiftChangeEvent;
+    public static void CallLightShiftChangeEvent(Season season, LightShift lightShift, float timeDifference)
+    {
+        LightShiftChangeEvent?.Invoke(season, lightShift, timeDifference);
+    }
 }

@@ -1,4 +1,5 @@
-
+using System;
+using UnityEngine;
 public class Settings
 {
     public const float itemFadeDuration = 0.35f;
@@ -24,5 +25,13 @@ public class Settings
     
     public const float animationBreakTime = 5f;
     public const int maxGridSize = 9999;
+    
+    //灯光
+    public const float lightChangeDuration = 25f;
+    public static TimeSpan morningTime = new TimeSpan(5, 0, 0);
+    public static TimeSpan nightTime = new TimeSpan(19, 0, 0);
+
+    public static Vector3 playerStartPos = new Vector3(-1.7f, -5f, 0);
+    public const int playerStartMoney = 100000;
 
 }
