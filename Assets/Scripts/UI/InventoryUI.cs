@@ -17,6 +17,7 @@ namespace WzFarm.Inventory
         private bool bagOpenned;
         [Header("通用背包")] [SerializeField] private GameObject baseBag;
         public GameObject slotShopPrefab;
+        public GameObject slotBoxPrefab;
         [Header("交易UI")] public TradeUI tradeUI;
         public TextMeshProUGUI playerMoneyText;
         
@@ -72,6 +73,7 @@ namespace WzFarm.Inventory
             GameObject prefab = slotType switch
             {
                 SlotType.Shop => slotShopPrefab,
+                SlotType.Box => slotBoxPrefab,
                 _ => null,
             };
             

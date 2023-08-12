@@ -782,7 +782,7 @@ MonoBehaviour:
   bluePrintData: {fileID: 11400000, guid: c94316a6049e86c47adf7d4a5f56f200, type: 2}
   _ItemDataListSo: {fileID: 11400000, guid: 54ed9fd6abb34b849a42b81a24427df1, type: 2}
   PlayerBag: {fileID: 11400000, guid: fa908012f2694e54e965c2c602166396, type: 2}
-  playerMoney: 989419
+  playerMoney: 98981981
 --- !u!4 &679822517
 Transform:
   m_ObjectHideFlags: 0
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   currentScene: 03.Market
   normalSpeed: 2
   isMoving: 0
-  interactable: 1
+  interactable: 0
   blankAnimationClip: {fileID: 0}
 --- !u!50 &1286689852
 Rigidbody2D:
@@ -2239,7 +2239,7 @@ MonoBehaviour:
   normalSpeed: 2
   isMoving: 0
   interactable: 0
-  blankAnimationClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
+  blankAnimationClip: {fileID: 0}
 --- !u!95 &1915524366
 Animator:
   serializedVersion: 5

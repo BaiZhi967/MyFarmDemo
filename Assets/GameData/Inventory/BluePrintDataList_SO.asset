@@ -29,3 +29,10 @@ MonoBehaviour:
     - itemID: 1012
       itemAmount: 10
     buildPrefab: {fileID: 323702984648161509, guid: 77d4e04a89197e34582a7db34a606ea6, type: 3}
+  - ID: 1024
+    resourceItem:
+    - itemID: 1012
+      itemAmount: 10
+    - itemID: 1015
+      itemAmount: 5
+    buildPrefab: {fileID: 8164559199134980251, guid: f46453576fe25064ba618a188f445900, type: 3}

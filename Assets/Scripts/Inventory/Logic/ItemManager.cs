@@ -13,6 +13,9 @@ public class ItemManager : MonoBehaviour
     private Transform playerTrans =>FindObjectOfType<Player>().transform;
 
     public Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
+    //记录场景家具
+    private Dictionary<string, List<SceneFurniture>> sceneFurnitureDict = new Dictionary<string, List<SceneFurniture>>();
+
 
     private void OnEnable()
     {
@@ -39,18 +42,24 @@ public class ItemManager : MonoBehaviour
     {
         BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(ID);
         var buildItem = Instantiate(bluePrint.buildPrefab, mousePos, Quaternion.identity, itemParent);
-        
+        if (buildItem.GetComponent<Box>())
+        {
+            buildItem.GetComponent<Box>().index = InventoryManager.Instance.BoxDataAmount;
+            buildItem.GetComponent<Box>().InitBox(buildItem.GetComponent<Box>().index);
+        }
     }
 
     private void OnBeforeSceneUnloadEvent()
     {
         GetAllSceneItems();
+        GetAllSceneFurniture();
     }
 
     private void OnAfterSceneLoadedEvent()
     {
         itemParent = GameObject.FindWithTag("ItemParent").transform;
         RecreateAllItems();
+        RebuildFurniture();
     }
     
 
@@ -123,6 +132,61 @@ public class ItemManager : MonoBehaviour
                 {
                     Item newItem = Instantiate(itemPrefab, item.position.ToVector3(), Quaternion.identity, itemParent);
                     newItem.Init(item.itemID);
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 获得场景所有家具
+    /// </summary>
+    private void GetAllSceneFurniture()
+    {
+        List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
+
+        foreach (var item in FindObjectsOfType<Furniture>())
+        {
+            SceneFurniture sceneFurniture = new SceneFurniture
+            {
+                itemID = item.itemID,
+                position = new SerializableVector3(item.transform.position)
+            };
+            if (item.GetComponent<Box>())
+                sceneFurniture.boxIndex = item.GetComponent<Box>().index;
+
+            currentSceneFurniture.Add(sceneFurniture);
+        }
+
+        if (sceneFurnitureDict.ContainsKey(SceneManager.GetActiveScene().name))
+        {
+            //找到数据就更新item数据列表
+            sceneFurnitureDict[SceneManager.GetActiveScene().name] = currentSceneFurniture;
+        }
+        else    //如果是新场景
+        {
+            sceneFurnitureDict.Add(SceneManager.GetActiveScene().name, currentSceneFurniture);
+        }
+    }
+    
+    /// <summary>
+    /// 重建当前场景家具
+    /// </summary>
+    private void RebuildFurniture()
+    {
+        List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
+
+        if (sceneFurnitureDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFurniture))
+        {
+            if (currentSceneFurniture != null)
+            {
+                foreach (SceneFurniture sceneFurniture in currentSceneFurniture)
+                {
+                    BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(sceneFurniture.itemID);
+                    var buildItem = Instantiate(bluePrint.buildPrefab, sceneFurniture.position.ToVector3(), Quaternion.identity, itemParent);
+                    if (buildItem.GetComponent<Box>())
+                    {
+                        buildItem.GetComponent<Box>().InitBox(sceneFurniture.boxIndex);
+                    }
                 }
             }
         }

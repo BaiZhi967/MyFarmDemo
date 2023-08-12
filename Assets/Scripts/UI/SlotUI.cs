@@ -25,6 +25,19 @@ namespace WzFarm.Inventory
         public ItemDetails _ItemDetails;
         public int itemAmount;
         public int slotIndex;
+        
+        public InventoryLocation Location
+        {
+            get
+            {
+                return slotType switch
+                {
+                    SlotType.Bag => InventoryLocation.Player,
+                    SlotType.Box => InventoryLocation.Box,
+                    _ => InventoryLocation.Player
+                };
+            }
+        }
 
         public InventoryUI _inventoryUI => GetComponentInParent<InventoryUI>();
         private void Start()
@@ -137,6 +150,12 @@ namespace WzFarm.Inventory
                 {
                     //卖东西
                     EventHandler.CallShowTradeUI(_ItemDetails, true);
+                }else if (slotType != SlotType.Shop && targetSlot.slotType != SlotType.Shop &&
+                          slotType != targetSlot.slotType)
+                {
+                    //跨背包数据交换物品
+                    InventoryManager.Instance.SwapItem(Location, slotIndex, targetSlot.Location, targetSlot.slotIndex);
+                    
                 }
 
 

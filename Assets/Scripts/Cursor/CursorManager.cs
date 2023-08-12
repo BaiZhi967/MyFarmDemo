@@ -165,6 +165,7 @@ public class CursorManager : MonoBehaviour
             {
                 builderImage.gameObject.SetActive(true);
                 builderImage.sprite = itemDetails.itemOnWorldSprite;
+                builderImage.SetNativeSize();
             }
         }
     }
@@ -287,6 +288,8 @@ public class CursorManager : MonoBehaviour
                     }
                     break;
                 case ItemType.Furniture:
+                    builderImage.gameObject.SetActive(true);
+                    var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);
                     if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID))
                     {
                         SetCursorValid();
@@ -306,7 +309,7 @@ public class CursorManager : MonoBehaviour
         }
     }
 
-    /// <summary>
+    /// <summary> 
     /// 是否与UI互动
     /// </summary>
     /// <returns></returns>
