@@ -177,4 +177,26 @@ public static class EventHandler
     {
         LightShiftChangeEvent?.Invoke(season, lightShift, timeDifference);
     }
+    //音效
+    public static event Action<SoundDetails> InitSoundEffect;
+    public static void CallInitSoundEffect(SoundDetails soundDetails)
+    {
+        InitSoundEffect?.Invoke(soundDetails);
+    }
+
+    public static event Action<SoundName> PlaySoundEvent;
+    public static void CallPlaySoundEvent(SoundName soundName)
+    {
+        PlaySoundEvent?.Invoke(soundName);
+    }
+    public static event Action<int> StartNewGameEvent;
+    public static void CallStartNewGameEvent(int index)
+    {
+        StartNewGameEvent?.Invoke(index);
+    }
+    public static event Action EndGameEvent;
+    public static void CallEndGameEvent()
+    {
+        EndGameEvent?.Invoke();
+    }
 }

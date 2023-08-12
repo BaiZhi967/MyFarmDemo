@@ -15,6 +15,7 @@ namespace WzFarm.Inventory
                 if (item._itemDetails.canPickedup)
                 {
                     InventoryManager.Instance.AddItem(item,true);
+                    EventHandler.CallPlaySoundEvent(SoundName.Pickup);
                 }
             }
         }

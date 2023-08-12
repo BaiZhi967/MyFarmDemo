@@ -52,7 +52,7 @@ public class CropDetails
     public ParticleEffectType effectType;
 
     public Vector3 effectPos;
-    //TODO:音效 等
+    public SoundName soundName;
     
 
 

@@ -42,6 +42,7 @@ MonoBehaviour:
     hasParticleEffect: 0
     effectType: 0
     effectPos: {x: 0, y: 0, z: 0}
+    soundName: 0
   - seedItemID: 1004
     growthDays: 0100000002000000020000000300000003000000
     growthPrefabs:
@@ -71,6 +72,7 @@ MonoBehaviour:
     hasParticleEffect: 0
     effectType: 0
     effectPos: {x: 0, y: 0, z: 0}
+    soundName: 0
   - seedItemID: 1011
     growthDays: 0100000002000000020000000300000003000000
     growthPrefabs:
@@ -100,6 +102,7 @@ MonoBehaviour:
     hasParticleEffect: 1
     effectType: 1
     effectPos: {x: 0, y: 2.5, z: 0}
+    soundName: 3
   - seedItemID: 1013
     growthDays: 00000000
     growthPrefabs:
@@ -121,6 +124,7 @@ MonoBehaviour:
     hasParticleEffect: 0
     effectType: 0
     effectPos: {x: 0, y: 0, z: 0}
+    soundName: 0
   - seedItemID: 1014
     growthDays: 00000000
     growthPrefabs:
@@ -142,6 +146,7 @@ MonoBehaviour:
     hasParticleEffect: 1
     effectType: 3
     effectPos: {x: 0, y: 0.6, z: 0}
+    soundName: 0
   - seedItemID: 1017
     growthDays: 00000000
     growthPrefabs:
@@ -163,6 +168,7 @@ MonoBehaviour:
     hasParticleEffect: 1
     effectType: 4
     effectPos: {x: 0, y: 0.3, z: 0}
+    soundName: 0
   - seedItemID: 1018
     growthDays: 00000000
     growthPrefabs:
@@ -184,6 +190,7 @@ MonoBehaviour:
     hasParticleEffect: 1
     effectType: 4
     effectPos: {x: 0, y: 0.3, z: 0}
+    soundName: 0
   - seedItemID: 1019
     growthDays: 00000000
     growthPrefabs:
@@ -205,3 +212,4 @@ MonoBehaviour:
     hasParticleEffect: 1
     effectType: 4
     effectPos: {x: 0, y: 0.3, z: 0}
+    soundName: 6
